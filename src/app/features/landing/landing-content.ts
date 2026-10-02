@@ -94,7 +94,6 @@ export const ROADMAP: readonly string[] = [
   'Module à destination des autorités de tutelle : bilans territoriaux agrégés à partir des données des plans de gestion.',
   'Module « Foncier » : suivi des données foncières associées aux sites gérés.',
   'Module « Infractions et incivilités » : centralisation des signalements sur les aires protégées.',
-  'Adaptation spécifique aux sites Natura 2000.',
 ];
 
 /** Un avantage d'un mode de déploiement. */
