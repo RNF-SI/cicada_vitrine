@@ -35,8 +35,15 @@ Le résultat complet — HTML prérendu, assets, PDF, `.htaccess` et
 
 ## 3. Téléverser
 
-Envoyer le **contenu** de `dist/cicada-vitrine/browser` dans `www`, par SFTP ou
-par le gestionnaire de fichiers OVH. Par exemple :
+Envoyer le **contenu** de `dist/cicada-vitrine/browser` dans `www` — son
+contenu, pas le dossier lui-même.
+
+> ⚠️ Le dossier contient un fichier `.htaccess`, que la plupart des clients FTP
+> **masquent par défaut**. Sans lui, les URL inconnues renvoient une erreur du
+> serveur au lieu de l'accueil, et les en-têtes de cache et de sécurité sautent.
+> Dans FileZilla : menu *Serveur → Forcer l'affichage des fichiers cachés*.
+
+Par exemple :
 
 ```bash
 rsync -av --delete dist/cicada-vitrine/browser/ <compte>@ftp.cluster0XX.hosting.ovh.net:www/
@@ -65,10 +72,13 @@ ticket arrive dans Zammad.
 
 | Besoin | Pourquoi |
 |--------|----------|
-| PHP 8.0 ou plus | `contact.php` utilise des types d'union et `never` |
+| PHP 8.1 ou plus | `contact.php` déclare un type de retour `never` |
 | Sorties HTTPS autorisées | appels à Turnstile et à Zammad |
 | `cURL` (ou `allow_url_fopen`) | le script gère les deux cas |
-| ~3 Mo d'espace | le site pèse 2,6 Mo |
+| ~3 Mo d'espace | le site pèse 2,5 Mo |
+
+Le script a été exécuté sans erreur sur PHP 8.0, 8.1 et 8.3, mais 8.0 n'est plus
+maintenu : choisir 8.2 ou 8.3 dans la configuration de l'hébergement.
 
 Pas de base de données, pas de cron, pas d'accès shell nécessaires.
 
