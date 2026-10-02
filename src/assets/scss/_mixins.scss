@@ -57,7 +57,6 @@
 
 /// Chapô d'une section.
 @mixin section-lead {
-  max-width: 68ch;
   margin: 0 0 $spacing-xl;
   font-size: $font-size-h4;
   font-weight: $font-weight-regular;

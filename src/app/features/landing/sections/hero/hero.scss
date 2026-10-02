@@ -24,7 +24,6 @@
   }
 
   &__title {
-    max-width: 22ch;
     margin: 0 0 $spacing-md;
     font-size: $font-size-h1;
     line-height: 52px;
@@ -32,7 +31,6 @@
   }
 
   &__lead {
-    max-width: 62ch;
     margin: 0 0 $spacing-xl;
     font-size: $font-size-h4;
     line-height: 28px;
