@@ -2,36 +2,29 @@
 @use 'mixins' as *;
 
 .hero {
-  position: relative;
-  padding-block: $spacing-xxl calc($spacing-xxl * 1.5);
+  padding-block: calc($spacing-xxl * 1.5) calc($spacing-xxl * 2);
   background-color: $beige;
+  text-align: center;
 
   &__inner {
-    @include container;
+    @include container(900px);
 
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 46%);
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: $spacing-xxl;
   }
 
-  // Le logo en grand : c'est l'élément d'identification, pas une décoration.
+  // Le logo est l'élément dominant du bloc : d'où une largeur en pourcentage de
+  // la colonne, bornée pour ne pas devenir démesurée sur un grand écran.
   &__logo {
     width: 100%;
-    max-width: 340px;
+    max-width: 440px;
     height: auto;
-    margin-bottom: $spacing-lg;
-  }
-
-  &__eyebrow {
-    @include subtitle;
-
-    max-width: 46ch;
-    // Le sigle développé : utile mais secondaire, on reste en petite capitale.
-    letter-spacing: 0.08em;
+    margin-bottom: $spacing-xl;
   }
 
   &__title {
+    max-width: 22ch;
     margin: 0 0 $spacing-md;
     font-size: $font-size-h1;
     line-height: 52px;
@@ -39,7 +32,7 @@
   }
 
   &__lead {
-    max-width: 58ch;
+    max-width: 62ch;
     margin: 0 0 $spacing-xl;
     font-size: $font-size-h4;
     line-height: 28px;
@@ -49,6 +42,7 @@
   &__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: $spacing-sm;
     margin-bottom: $spacing-xl;
   }
@@ -56,6 +50,7 @@
   &__badges {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: $spacing-sm;
     margin: 0;
     padding: 0;
@@ -79,43 +74,15 @@
       line-height: 1;
     }
   }
-
-  &__media {
-    position: relative;
-  }
-
-  &__image {
-    display: block;
-    width: 100%;
-    height: clamp(320px, 42vw, 520px);
-    object-fit: cover;
-    // Rayon asymétrique des tuiles du Kit UI.
-    border-radius: $border-radius-xl 0 $border-radius-xl $border-radius-xl;
-    box-shadow: $shadow-medium;
-  }
 }
 
-@media (max-width: $breakpoint-desktop) {
+@media (max-width: $breakpoint-tablet) {
   .hero {
-    padding-block: $spacing-xl;
+    padding-block: $spacing-xl calc($spacing-xxl * 1.2);
 
-    &__inner {
-      grid-template-columns: 1fr;
-      gap: $spacing-xl;
-    }
-
-    // L'image passe sous le texte : en arrivant, on doit voir le logo, pas une
-    // photo. Elle reste au-dessus du contenu sur tablette, où les deux tiennent.
-    &__image {
-      height: clamp(220px, 40vw, 320px);
-    }
-  }
-}
-
-@media (max-width: $breakpoint-mobile) {
-  .hero {
     &__logo {
-      max-width: 240px;
+      max-width: 320px;
+      margin-bottom: $spacing-lg;
     }
 
     &__title {
@@ -127,9 +94,21 @@
       font-size: $font-size-base;
       line-height: $line-height-base;
     }
+  }
+}
 
-    &__actions .btn {
+@media (max-width: $breakpoint-mobile) {
+  .hero {
+    &__logo {
+      max-width: 260px;
+    }
+
+    &__actions {
       width: 100%;
+
+      .btn {
+        width: 100%;
+      }
     }
   }
 }
