@@ -2,7 +2,7 @@
   <div class="features__inner">
     <header class="features__head">
       <p class="features__eyebrow">Fonctionnalités</p>
-      <h2 id="fonctionnalites-title" class="features__title">Cinq modules pour la version 1</h2>
+      <h2 id="fonctionnalites-title" class="features__title">Cinq modules complémentaires</h2>
       <p class="features__lead">
         CICADA accompagne tout le cycle de vie d'un plan de gestion, de son élaboration à son
         évaluation. Les modules s'utilisent indépendamment : aucun niveau d'utilisation minimum
@@ -17,13 +17,32 @@
             <span class="module__icon" aria-hidden="true">
               <i class="fi" [class]="module.icon"></i>
             </span>
-            <span class="module__tag">{{ module.availability }}</span>
+            <!-- Pastille réservée aux modules pas encore disponibles. -->
+            @if (module.availability) {
+              <span class="module__tag">{{ module.availability }}</span>
+            }
           </div>
           <h3 class="module__title">{{ module.title }}</h3>
           <p class="module__text">{{ module.text }}</p>
         </li>
       }
     </ul>
+
+    <!-- Gouvernance des données : qualifie l'accès au module « Exploration ». -->
+    <aside class="data-sharing">
+      <span class="data-sharing__icon" aria-hidden="true">
+        <i class="fi fi-rr-handshake"></i>
+      </span>
+      <div>
+        <h3 class="data-sharing__title">Explorer suppose de contribuer</h3>
+        <p class="data-sharing__text">
+          Le module d'exploration s'appuie sur une base commune : les données des différentes
+          instances de CICADA sont centralisées sur le serveur de Réserves naturelles de France. Y
+          accéder suppose donc d'y contribuer — le partage de vos propres données conditionne
+          l'accès à cette fonctionnalité, et relève d'un consentement explicite de votre structure.
+        </p>
+      </div>
+    </aside>
 
     <div class="features__cross">
       <h3 class="features__subtitle">Et dans tous les modules</h3>

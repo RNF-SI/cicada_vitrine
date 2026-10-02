@@ -5,57 +5,55 @@ import { VitrineDocument } from '../../shared/components/pdf-dialog/pdf-dialog';
  *
  * Source : la note de présentation du projet (avril 2026), reprise dans
  * `public/documents/presentation-cicada.pdf`, et la documentation du dépôt
- * CICADA. Les échéances de déploiement viennent de cette note : les mettre à
- * jour ici dès qu'elles évoluent, elles ne sont écrites nulle part ailleurs
- * dans la vitrine.
+ * CICADA.
  */
 
-/** Un des modules de la version 1, présenté sous forme de tuile. */
+/** Un module de CICADA, présenté sous forme de tuile. */
 export interface ModuleCard {
   readonly icon: string;
   readonly title: string;
   readonly text: string;
-  /** Échéance annoncée de mise à disposition. */
-  readonly availability: string;
+  /**
+   * Mention de disponibilité, affichée en pastille sur la tuile. Absente pour
+   * un module déjà disponible : seuls ceux qui ne le sont pas encore portent
+   * une indication.
+   */
+  readonly availability?: string;
   /** Couleur d'accent, prise dans la palette décorative du Kit UI. */
   readonly accent: 'primary' | 'yellow' | 'salmon' | 'terra-cotta' | 'pale-green';
 }
 
-/** Les cinq modules communs de la version 1. */
+/** Les cinq modules communs. */
 export const MODULES: readonly ModuleCard[] = [
   {
     icon: 'fi-rr-map-marker',
     title: 'Mes sites',
     text: "Gérer les sites auxquels vous êtes rattaché et les droits associés, co-gestion comprise. Les têtes de réseau fournissent un référentiel de sites ; vous pouvez en ajouter en important un fichier géométrique ou en dessinant directement l'emprise.",
-    availability: 'Mi-2026',
     accent: 'salmon',
   },
   {
     icon: 'fi-rr-file-edit',
     title: 'Mes plans de gestion',
     text: "Tout le cycle du plan, de la saisie initiale à l'évaluation, structuré selon le CT88 : enjeux, objectifs, indicateurs et actions, plans multi-sites, versionnement et duplication pour le renouvellement. Puis le suivi annuel des actions et des indicateurs, et les graphiques de bilan de la gestion.",
-    availability: 'Mi-2026',
     accent: 'primary',
   },
   {
     icon: 'fi-rr-clipboard-list-check',
     title: 'Mes suivis et inventaires',
     text: 'Décrire les suivis et inventaires réalisés — objectifs, protocoles, cibles. Le module ne remplace pas les outils de saisie naturaliste comme GeoNature : il centralise ce qui est suivi, comment et pourquoi. Utilisable seul, sans saisir tout un plan de gestion.',
-    availability: 'Mi-2026',
     accent: 'pale-green',
   },
   {
     icon: 'fi-rr-document-signed',
     title: 'Zonages réglementaires',
     text: "Saisir et visualiser la réglementation en vigueur sur l'aire protégée. Un référentiel d'activités et une matrice de correspondance structurent les dispositions par texte ; l'auto-complétion réduit fortement la saisie, et vous gardez la main pour documenter les exceptions.",
-    availability: 'Fin 2026',
+    availability: 'Prochainement',
     accent: 'yellow',
   },
   {
     icon: 'fi-rr-search',
     title: 'Exploration des données',
     text: "Consulter les plans de gestion et les zonages des autres aires protégées contributrices — protocoles de suivi, indicateurs, grilles de lecture — pour s'en inspirer. Les données de suivi de la mise en œuvre, elles, restent confidentielles.",
-    availability: 'Fin 2026',
     accent: 'terra-cotta',
   },
 ];

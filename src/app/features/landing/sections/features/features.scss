@@ -48,13 +48,23 @@
     margin-bottom: $spacing-xxl;
   }
 
+  // Quatre colonnes pour les quatre apports transversaux : en `auto-fit`, ils
+  // se répartissaient en trois plus un orphelin sur la ligne suivante.
   &__cross-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: $spacing-lg;
     margin: 0;
     padding: 0;
     list-style: none;
+
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__roadmap {
@@ -180,6 +190,53 @@
     .module__icon {
       background-color: rgba($secondary-pale-green, 0.55);
     }
+  }
+}
+
+// --- Gouvernance des données --------------------------------------------------
+// Encart d'information : la condition d'accès au module d'exploration n'est pas
+// un détail de mise en œuvre, elle engage la structure. D'où un bloc distinct,
+// et non une phrase noyée dans le texte de la tuile.
+.data-sharing {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xxl;
+  padding: $spacing-lg $spacing-xl;
+  background-color: $secondary-pale-green;
+  border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+
+  &__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: $white;
+    border-radius: $border-radius-round;
+    color: $primary-color;
+    font-size: $font-size-h3;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xxs;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+
+  // Texte noir sur vert pâle : combinaison AA du Kit UI.
+  &__text {
+    margin: 0;
+    color: $black;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .data-sharing {
+    flex-direction: column;
+    padding: $spacing-lg $spacing-md;
   }
 }
 
