@@ -28,11 +28,19 @@
     margin-bottom: 0;
   }
 
+  // Trois colonnes explicites : en `auto-fit`, la troisième voie passait seule
+  // à la ligne. Elles s'empilent d'un coup sous le seuil « bureau », une carte
+  // de 300 px étant trop étroite pour la liste qu'elle porte.
   &__options {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: $spacing-xl;
-    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $spacing-lg;
+    align-items: stretch;
+
+    @media (max-width: $breakpoint-desktop) {
+      grid-template-columns: 1fr;
+      gap: $spacing-xl;
+    }
   }
 }
 
@@ -40,7 +48,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: $spacing-xl;
+  padding: $spacing-lg;
   border-radius: $border-radius-xl;
 
   &__head {
@@ -140,6 +148,29 @@
 
     .option__kicker {
       color: $gray-dark;
+    }
+
+    .option__title {
+      color: $primary-color;
+    }
+
+    .option__list i {
+      color: $primary-color;
+    }
+  }
+
+  // --- Option « tête de réseau » : vert pâle, la voie la plus directe pour les
+  // structures des deux réseaux, donc au centre et visuellement distincte ------
+  &--network {
+    background-color: $secondary-pale-green;
+
+    .option__icon {
+      background-color: $white;
+      color: $primary-color;
+    }
+
+    .option__kicker {
+      color: $secondary-terra-cotta;
     }
 
     .option__title {

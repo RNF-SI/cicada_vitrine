@@ -113,8 +113,8 @@ export const SELF_HOSTED_POINTS: readonly DeploymentPoint[] = [
     text: 'Déploiement par Docker Compose : toute la pile démarre en une commande.',
   },
   {
-    icon: 'fi-rr-computer',
-    text: 'Vos données ne quittent pas votre infrastructure.',
+    icon: 'fi-rr-shield-check',
+    text: 'Les données de suivi de la mise en œuvre restent confidentielles.',
   },
   {
     icon: 'fi-rr-shuffle',
@@ -123,6 +123,30 @@ export const SELF_HOSTED_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-tools',
     text: "Guide d'installation public et entraide sur Matrix.",
+  },
+];
+
+/**
+ * Mode « instance de ma tête de réseau » : gratuit pour les gestionnaires de
+ * réserves naturelles et les Conservatoires d'espaces naturels, qui relèvent
+ * respectivement de RNF et de la FCEN.
+ */
+export const NETWORK_POINTS: readonly DeploymentPoint[] = [
+  {
+    icon: 'fi-rr-gift',
+    text: 'Gratuit, sans convention à négocier ni devis à demander.',
+  },
+  {
+    icon: 'fi-rr-plug',
+    text: 'Rien à installer ni à maintenir : vous recevez vos accès.',
+  },
+  {
+    icon: 'fi-rr-sitemap',
+    text: 'Vos sites et vos plans aux côtés de ceux de votre réseau.',
+  },
+  {
+    icon: 'fi-rr-life-ring',
+    text: 'Accompagnement par votre tête de réseau, qui connaît vos pratiques.',
   },
 ];
 
