@@ -108,10 +108,24 @@
     gap: $spacing-sm;
   }
 
-  &__note {
-    margin: $spacing-md 0 0;
+  // Encart tarifaire : posé avant le bouton d'appel, et assez contrasté pour
+  // qu'on ne puisse pas le manquer.
+  &__pricing {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    margin: 0 0 $spacing-lg;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-md;
     font-size: $font-size-small;
     line-height: $line-height-small;
+
+    i {
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: $font-size-h4;
+      line-height: 1;
+    }
   }
 
   // --- Option auto-hébergée : carte claire, accent vert pâle ------------------
@@ -175,8 +189,15 @@
       color: $secondary-yellow;
     }
 
-    .option__note {
-      color: rgba($white, 0.8);
+    // Jaune du Kit UI sur fond bleu-vert translucide : lisible, et distinct des
+    // puces de la liste au-dessus.
+    .option__pricing {
+      background-color: rgba($white, 0.12);
+      color: $white;
+
+      i {
+        color: $secondary-yellow;
+      }
     }
   }
 }

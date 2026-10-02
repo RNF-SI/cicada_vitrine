@@ -106,55 +106,51 @@ export interface DeploymentPoint {
 export const SELF_HOSTED_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-unlock',
-    text: 'Code source intégralement ouvert, sous licence GNU GPL v3 : aucune fonctionnalité réservée, aucun abonnement.',
+    text: 'Code source complet sous licence GNU GPL v3. Aucune fonctionnalité réservée.',
   },
   {
     icon: 'fi-rr-cube',
-    text: 'Installation par Docker Compose : la pile complète (Django, Angular, PostgreSQL/PostGIS, Celery, Redis) démarre en une commande.',
+    text: 'Déploiement par Docker Compose : toute la pile démarre en une commande.',
   },
   {
     icon: 'fi-rr-computer',
-    text: 'Hébergement sur vos propres serveurs : les données ne quittent jamais votre infrastructure.',
+    text: 'Vos données ne quittent pas votre infrastructure.',
   },
   {
     icon: 'fi-rr-shuffle',
-    text: "Vous restez libre de contribuer ou non à la base de données commune : c'est votre instance, c'est votre choix.",
-  },
-  {
-    icon: 'fi-rr-settings-sliders',
-    text: 'Maîtrise totale de la configuration, des mises à jour et du calendrier de montée de version.',
+    text: 'Vous décidez de contribuer ou non à la base commune.',
   },
   {
     icon: 'fi-rr-tools',
-    text: "Guide d'installation, documentation technique et suivi des anomalies publics ; appui de la communauté sur Matrix.",
+    text: "Guide d'installation public et entraide sur Matrix.",
   },
 ];
 
-/** Mode « service hébergé », opéré par les têtes de réseau. */
+/** Mode « service hébergé », opéré par Réserves naturelles de France. */
 export const SAAS_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-globe',
-    text: 'Votre propre nom de domaine, pour une adresse aux couleurs de votre structure.',
+    text: 'Votre nom de domaine.',
   },
   {
     icon: 'fi-rr-user-crown',
-    text: 'Vous êtes administrateur de votre plateforme : utilisateurs, organismes, sites et paramètres restent sous votre contrôle.',
+    text: 'Vous administrez votre plateforme : utilisateurs, organismes, sites, paramètres.',
   },
   {
     icon: 'fi-rr-picture',
-    text: "Personnalisation de l'identité visuelle : logo de votre organisme dans le bandeau, image d'accueil, couleurs d'instance.",
+    text: "Votre logo et votre image d'accueil.",
   },
   {
     icon: 'fi-rr-database',
-    text: 'Accès direct à la base de données, pour vos exports, vos traitements SIG et vos tableaux de bord métier.',
+    text: 'Accès direct à la base de données, pour vos exports et traitements SIG.',
   },
   {
     icon: 'fi-rr-refresh',
-    text: "Mises à jour, sauvegardes et supervision assurées : vous n'avez pas d'infrastructure à maintenir.",
+    text: 'Mises à jour, sauvegardes et supervision assurées.',
   },
   {
     icon: 'fi-rr-headset',
-    text: "Assistance aux utilisateurs par l'équipe du projet, qui connaît l'outil et la méthodologie.",
+    text: "Assistance par l'équipe du projet.",
   },
 ];
 
