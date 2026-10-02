@@ -1,0 +1,197 @@
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="contact__inner">
+    <div class="contact__intro">
+      <p class="contact__eyebrow">Contact</p>
+      <h2 id="contact-title" class="contact__title">Écrivez-nous</h2>
+      <p class="contact__lead">
+        Demande d'instance hébergée, question d'installation, signalement : votre message ouvre
+        directement un ticket auprès de l'équipe du projet, qui vous répond par courriel.
+      </p>
+
+      <ul class="list-bullets contact__hints">
+        <li>
+          Précisez votre structure et le nombre de sites concernés pour une demande d'hébergement.
+        </li>
+        <li>Pour une anomalie, indiquez la version de CICADA et les étapes pour la reproduire.</li>
+        <li>
+          Les échanges purement techniques trouvent souvent une réponse plus rapide sur Matrix.
+        </li>
+      </ul>
+
+      <p class="contact__matrix">
+        <a [href]="config.matrixUrl" target="_blank" rel="noopener">
+          <i class="fi fi-rr-comments" aria-hidden="true"></i>
+          Rejoindre le salon Matrix
+        </a>
+      </p>
+    </div>
+
+    <div class="contact__panel">
+      @if (status() === 'sent') {
+        <!-- Confirmation : on remplace le formulaire plutôt que de l'empiler. -->
+        <div class="contact__success" role="status">
+          <span class="contact__success-icon" aria-hidden="true">
+            <i class="fi fi-rr-check"></i>
+          </span>
+          <h3 class="contact__success-title">Message envoyé</h3>
+          <p>
+            Votre demande a bien été transmise à l'équipe du projet.
+            @if (ticketNumber()) {
+              Elle porte le numéro de ticket <strong>{{ ticketNumber() }}</strong
+              >.
+            }
+            Vous recevrez la réponse à l'adresse indiquée.
+          </p>
+          <button type="button" class="btn btn--secondary" (click)="status.set('idle')">
+            Envoyer une autre demande
+          </button>
+        </div>
+      } @else {
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="contact-name">
+                Nom et prénom <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="contact-name"
+                class="form__input"
+                type="text"
+                autocomplete="name"
+                formControlName="name"
+                [attr.aria-invalid]="invalid(form.controls.name)"
+                [attr.aria-describedby]="invalid(form.controls.name) ? 'contact-name-error' : null"
+              />
+              @if (invalid(form.controls.name)) {
+                <p id="contact-name-error" class="form__error">Merci d'indiquer votre nom.</p>
+              }
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="contact-email">
+                Adresse électronique <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="contact-email"
+                class="form__input"
+                type="email"
+                autocomplete="email"
+                formControlName="email"
+                [attr.aria-invalid]="invalid(form.controls.email)"
+                [attr.aria-describedby]="
+                  invalid(form.controls.email) ? 'contact-email-error' : null
+                "
+              />
+              @if (invalid(form.controls.email)) {
+                <p id="contact-email-error" class="form__error">
+                  Merci d'indiquer une adresse électronique valide : c'est par là que la réponse
+                  arrivera.
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="contact-organisation">Structure</label>
+              <input
+                id="contact-organisation"
+                class="form__input"
+                type="text"
+                autocomplete="organization"
+                formControlName="organisation"
+              />
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="contact-subject">
+                Objet <span aria-hidden="true">*</span>
+              </label>
+              <select id="contact-subject" class="form__input" formControlName="subject">
+                @for (subject of subjects; track subject.value) {
+                  <option [value]="subject.value">{{ subject.label }}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="contact-message">
+              Votre message <span aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              class="form__input form__input--textarea"
+              rows="6"
+              formControlName="message"
+              [attr.aria-invalid]="invalid(form.controls.message)"
+              [attr.aria-describedby]="
+                invalid(form.controls.message) ? 'contact-message-error' : null
+              "
+            ></textarea>
+            @if (invalid(form.controls.message)) {
+              <p id="contact-message-error" class="form__error">
+                Merci de détailler votre demande en quelques lignes (20 caractères minimum).
+              </p>
+            }
+          </div>
+
+          <!-- Champ piège anti-robot : invisible et ignoré des lecteurs d'écran. -->
+          <div class="form__honeypot" aria-hidden="true">
+            <label for="contact-website">Site web</label>
+            <input
+              id="contact-website"
+              type="text"
+              tabindex="-1"
+              formControlName="website"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form__field form__field--consent">
+            <label class="form__checkbox">
+              <input type="checkbox" formControlName="consent" />
+              <span>
+                J'accepte que les informations saisies soient utilisées pour traiter ma demande,
+                conformément aux
+                <a routerLink="/mentions-legales" fragment="donnees">
+                  informations sur les données personnelles</a
+                >.
+                <span aria-hidden="true">*</span>
+              </span>
+            </label>
+            @if (invalid(form.controls.consent)) {
+              <p class="form__error">Cet accord est nécessaire pour traiter votre demande.</p>
+            }
+          </div>
+
+          <app-captcha (token)="onCaptcha($event)" />
+
+          @if (errorMessage()) {
+            <p class="form__alert" role="alert">
+              <i class="fi fi-rr-exclamation" aria-hidden="true"></i>
+              {{ errorMessage() }}
+            </p>
+          }
+
+          <div class="form__actions">
+            <button
+              type="submit"
+              class="btn btn--primary btn--block"
+              [disabled]="status() === 'sending'"
+            >
+              @if (status() === 'sending') {
+                <i class="fi fi-rr-spinner" aria-hidden="true"></i>
+                Envoi en cours…
+              } @else {
+                <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+                Envoyer la demande
+              }
+            </button>
+            <p class="form__legal">Les champs marqués d'un astérisque sont obligatoires.</p>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</section>

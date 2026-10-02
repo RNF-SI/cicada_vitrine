@@ -1,0 +1,16 @@
+@use 'tokens' as *;
+
+.captcha {
+  &__widget {
+    // Hauteur réservée pour éviter un saut de mise en page au chargement
+    // du widget (65px est la hauteur nominale de Turnstile).
+    min-height: 65px;
+  }
+
+  &__error {
+    margin: $spacing-xs 0 0;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $error-color;
+  }
+}

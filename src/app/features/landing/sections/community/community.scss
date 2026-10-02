@@ -1,0 +1,119 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.community {
+  @include section-spacing;
+
+  background-color: $white;
+
+  &__inner {
+    @include container;
+  }
+
+  &__head {
+    max-width: 72ch;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__lead {
+    @include section-lead;
+
+    margin-bottom: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: $spacing-xl;
+  background-color: $gray-lightest;
+  border: $border-width solid $gray-light;
+  border-radius: $border-radius-xl;
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: $spacing-md;
+    background-color: $secondary-pale-green;
+    border-radius: $border-radius-round;
+    color: $primary-color;
+    font-size: $font-size-h3;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+
+  &__text {
+    flex: 1;
+    margin: 0 0 $spacing-md;
+    color: $black;
+  }
+
+  &__address {
+    margin: 0 0 $spacing-md;
+
+    code {
+      display: inline-block;
+      padding: $spacing-xxs $spacing-sm;
+      background-color: $white;
+      border: $border-width solid $gray-light;
+      border-radius: $border-radius-sm;
+      font-family: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+      font-size: $font-size-small;
+      color: $secondary-terra-cotta;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  // Le salon Matrix est la porte d'entrée principale : accent jaune du Kit UI.
+  &--matrix {
+    background-color: $beige;
+    border-color: $secondary-yellow;
+
+    .channel__icon {
+      background-color: $secondary-yellow;
+      color: $primary-color;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .channel {
+    padding: $spacing-lg;
+
+    .btn {
+      width: 100%;
+    }
+
+    &__actions {
+      width: 100%;
+    }
+  }
+}

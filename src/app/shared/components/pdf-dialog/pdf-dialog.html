@@ -1,0 +1,53 @@
+<dialog
+  #dialog
+  class="pdf-dialog"
+  aria-labelledby="pdf-dialog-title"
+  (click)="onBackdropClick($event)"
+  (close)="document.set(null)"
+>
+  @let doc = document();
+  @if (doc) {
+    <div class="pdf-dialog__panel">
+      <header class="pdf-dialog__header">
+        <div>
+          <p class="pdf-dialog__eyebrow">Aperçu du document</p>
+          <h2 id="pdf-dialog-title" class="pdf-dialog__title">{{ doc.title }}</h2>
+        </div>
+        <button
+          type="button"
+          class="pdf-dialog__close"
+          aria-label="Fermer l'aperçu"
+          (click)="close()"
+        >
+          <i class="fi fi-rr-cross" aria-hidden="true"></i>
+        </button>
+      </header>
+
+      <div class="pdf-dialog__viewer">
+        @let url = viewerUrl();
+        @if (url) {
+          <iframe
+            [src]="url"
+            [title]="'Aperçu du document : ' + doc.title"
+            class="pdf-dialog__frame"
+          ></iframe>
+        }
+      </div>
+
+      <footer class="pdf-dialog__footer">
+        <p class="pdf-dialog__hint">
+          Si l'aperçu ne s'affiche pas, téléchargez le document pour le consulter.
+        </p>
+        <div class="pdf-dialog__actions">
+          <button type="button" class="btn btn--secondary" (click)="close()">Fermer</button>
+          @if (doc.file) {
+            <a class="btn btn--primary" [href]="doc.file" [attr.download]="doc.downloadName">
+              <i class="fi fi-rr-download" aria-hidden="true"></i>
+              Télécharger le PDF
+            </a>
+          }
+        </div>
+      </footer>
+    </div>
+  }
+</dialog>

@@ -1,0 +1,219 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.features {
+  @include section-spacing;
+
+  background-color: $beige;
+
+  &__inner {
+    @include container;
+  }
+
+  &__head {
+    max-width: 72ch;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__lead {
+    @include section-lead;
+
+    margin-bottom: 0;
+  }
+
+  &__subtitle {
+    margin: 0 0 $spacing-md;
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+    color: $primary-color;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-lg;
+    margin: 0 0 $spacing-xxl;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__cross {
+    margin-bottom: $spacing-xxl;
+  }
+
+  &__cross-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__roadmap {
+    padding: $spacing-lg $spacing-xl;
+    background-color: $white;
+    border-radius: $border-radius-xl;
+    border-left: $border-width-accent solid $secondary-yellow;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__roadmap-intro {
+    max-width: 68ch;
+    color: $gray-dark;
+  }
+
+  &__roadmap-note {
+    margin: $spacing-md 0 0;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $gray-dark;
+  }
+
+  &__more {
+    margin: 0;
+
+    i {
+      margin-left: $spacing-xxs;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+// --- Tuile de module ----------------------------------------------------------
+.module {
+  @include card;
+
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-lg;
+  // Tuile asymétrique du Kit UI : coin haut-gauche droit.
+  border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+  border-left: $border-width-accent solid $primary-color;
+  transition:
+    box-shadow $transition-base,
+    transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-medium;
+    transform: translateY(-2px);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: $border-radius-round;
+    background-color: $primary-bg-light;
+    color: $primary-color;
+    font-size: $font-size-h4;
+  }
+
+  // Échéance : pastille neutre du Kit UI, texte noir (combinaison AA).
+  &__tag {
+    padding: $spacing-xxs $spacing-sm;
+    background-color: $tag-gray;
+    border-radius: $border-radius-lg;
+    color: $black;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    white-space: nowrap;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+
+  &__text {
+    margin: 0;
+    color: $black;
+  }
+
+  // Variantes d'accent : fonds décoratifs uniquement, jamais de texte dessus.
+  &--yellow {
+    border-left-color: $secondary-yellow;
+
+    .module__icon {
+      background-color: rgba($secondary-yellow, 0.35);
+    }
+  }
+
+  &--salmon {
+    border-left-color: $secondary-orange-salmon;
+
+    .module__icon {
+      background-color: rgba($secondary-orange-salmon, 0.35);
+    }
+  }
+
+  &--terra-cotta {
+    border-left-color: $secondary-terra-cotta;
+
+    .module__icon {
+      background-color: rgba($secondary-terra-cotta, 0.16);
+      color: $secondary-terra-cotta;
+    }
+  }
+
+  &--pale-green {
+    border-left-color: $secondary-pale-green;
+
+    .module__icon {
+      background-color: rgba($secondary-pale-green, 0.55);
+    }
+  }
+}
+
+// --- Apport transversal -------------------------------------------------------
+.cross {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+
+  &__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: $secondary-terra-cotta;
+    font-size: $font-size-h3;
+    line-height: 1;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xxs;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $primary-color;
+  }
+
+  &__text {
+    margin: 0;
+    color: $black;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .features__roadmap {
+    padding: $spacing-lg $spacing-md;
+  }
+}

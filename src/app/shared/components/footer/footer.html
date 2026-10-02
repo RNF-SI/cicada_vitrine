@@ -1,0 +1,88 @@
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img
+          src="/assets/images/logo-cicada-nb-2026.svg"
+          alt="CICADA"
+          class="footer__logo"
+          width="284"
+          height="129"
+        />
+        <p class="footer__tagline">
+          Capitalisation Inter-réseaux pour la Centralisation et l'Analyse des Données des Aires
+          protégées.
+        </p>
+        <p class="footer__license">
+          Logiciel libre publié sous licence GNU GPL v3 — version
+          {{ config.appVersion }}.
+        </p>
+      </div>
+
+      <nav class="footer__links" aria-label="Liens utiles">
+        <div class="footer__group">
+          <h2 class="footer__group-title">Le projet</h2>
+          <ul>
+            <li><a routerLink="/" fragment="projet">Présentation</a></li>
+            <li><a routerLink="/" fragment="fonctionnalites">Fonctionnalités</a></li>
+            <li><a routerLink="/" fragment="deploiement">Déployer CICADA</a></li>
+            <li><a routerLink="/" fragment="ressources">Ressources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__group">
+          <h2 class="footer__group-title">Contribuer</h2>
+          <ul>
+            <li>
+              <a [href]="config.repositoryUrl" target="_blank" rel="noopener"> Code source </a>
+            </li>
+            <li>
+              <a [href]="config.issuesUrl" target="_blank" rel="noopener">
+                Signaler une anomalie
+              </a>
+            </li>
+            <li>
+              <a [href]="config.matrixUrl" target="_blank" rel="noopener">
+                Salon Matrix des développeurs
+              </a>
+            </li>
+            <li>
+              <a [href]="config.docsUrl" target="_blank" rel="noopener"> Documentation </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__group">
+          <h2 class="footer__group-title">Informations</h2>
+          <ul>
+            <li><a routerLink="/" fragment="contact">Nous écrire</a></li>
+            <li><a routerLink="/mentions-legales">Mentions légales</a></li>
+            <li>
+              <a routerLink="/mentions-legales" fragment="donnees"> Données personnelles </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Porteurs du projet : citation obligatoire des deux têtes de réseau. -->
+    <div class="footer__partners">
+      <div class="footer__partners-block">
+        <p class="footer__partners-label">Un projet porté par</p>
+        <app-partner-logos [partners]="foundingPartners" [compact]="true" />
+      </div>
+      <div class="footer__partners-block">
+        <p class="footer__partners-label">En partenariat avec</p>
+        <app-partner-logos [partners]="associatedPartners" [compact]="true" />
+      </div>
+    </div>
+
+    <!-- Mentions obligatoires du financement LIFE BIODIV'FRANCE. -->
+    <app-eu-funding-notice />
+
+    <p class="footer__copyright">
+      © {{ currentYear }} Réserves naturelles de France et Fédération des Conservatoires d'espaces
+      naturels.
+    </p>
+  </div>
+</footer>

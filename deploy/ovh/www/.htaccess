@@ -1,0 +1,52 @@
+# Configuration Apache de la vitrine CICADA (hébergement OVH).
+#
+# Le site est entièrement prérendu : Apache sert des fichiers HTML, il n'y a pas
+# de routeur côté serveur à prévoir. Seul `/api/contact.php` est dynamique.
+
+# --- Page d'erreur ------------------------------------------------------------
+# Une URL inconnue renvoie l'accueil, comme la route `**` de l'application.
+ErrorDocument 404 /index.html
+
+# --- Sécurité -----------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Le site ne s'affiche pas dans une iframe tierce.
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Pas de reniflage de type MIME.
+  Header always set X-Content-Type-Options "nosniff"
+  # Le référent complet n'est transmis qu'au sein du site.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Le fichier de configuration vit au-dessus de la racine web, mais par
+# précaution on refuse de servir tout fichier qui porterait ce nom.
+<Files "cicada-vitrine-config.php">
+  Require all denied
+</Files>
+
+# --- Compression --------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Cache --------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Les fichiers JS et CSS portent une empreinte dans leur nom : ils peuvent
+  # être mis en cache sans limite, un nouveau build produit de nouveaux noms.
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+
+  # Images, polices et PDF : un mois, ils changent rarement et gardent leur nom.
+  <FilesMatch "\.(jpg|jpeg|png|svg|webp|woff2|pdf)$">
+    ExpiresDefault "access plus 1 month"
+  </FilesMatch>
+
+  # Le HTML, lui, doit être revalidé : c'est lui qui pointe vers les empreintes.
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+  </FilesMatch>
+</IfModule>

@@ -1,0 +1,250 @@
+// =============================================================================
+// Styles globaux — vitrine CICADA
+// =============================================================================
+// La vitrine n'embarque pas Angular Material (inutile pour une page de contenu) :
+// les composants sont écrits à la main, mais strictement sur les tokens du Kit UI
+// Biodiv' repris de l'application CICADA (cf. `assets/scss/_tokens.scss`).
+// Police Nunito et icônes Uicons chargées dans `index.html`, comme dans l'app.
+
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// --- Reset ciblé --------------------------------------------------------------
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base; // 14px : densité du Kit UI
+  // Compense le bandeau collant lors d'une navigation par ancre.
+  scroll-padding-top: calc($nav-height + $spacing-lg);
+  // Pas de `scroll-behavior: smooth` : la navigation par ancre est pilotée en
+  // TypeScript (cf. `App` et `Landing`) avec `behavior: 'instant'`, qui
+  // l'emporterait de toute façon. Pour passer au défilement animé, remplacer
+  // `'instant'` par `'smooth'` à ces deux endroits.
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: $beige;
+  color: $black;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// --- Typographie --------------------------------------------------------------
+h1,
+h2,
+h3,
+h4 {
+  color: $primary-color;
+  font-weight: $font-weight-bold;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  line-height: $line-height-h1;
+  margin: 0 0 $spacing-lg;
+}
+
+h2 {
+  font-size: $font-size-h2;
+  line-height: $line-height-h2;
+  margin: 0 0 $spacing-md;
+}
+
+h3 {
+  font-size: $font-size-h3;
+  line-height: $line-height-h3;
+  margin: 0 0 $spacing-md;
+}
+
+h4 {
+  font-size: $font-size-h4;
+  line-height: $line-height-h4;
+  margin: 0 0 $spacing-sm;
+}
+
+p {
+  margin: 0 0 $spacing-md;
+}
+
+a {
+  color: $primary-color;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $secondary-terra-cotta;
+    text-decoration: underline;
+  }
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+// --- Boutons pill (Kit UI 11/2025) -------------------------------------------
+// Rayon 22px, Nunito bold, pas de capitales forcées.
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $btn-padding-y $btn-padding-x;
+  border: $border-width-thick solid transparent;
+  border-radius: $border-radius-pill;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  i {
+    font-size: $font-size-h4;
+    line-height: 1;
+  }
+}
+
+// Bouton principal : fond bleu-vert, texte et icônes BLANC (combinaison AA).
+.btn--primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+    border-color: $primary-hover;
+    color: $white;
+  }
+}
+
+// Bouton secondaire : contour bleu-vert sur fond clair.
+.btn--secondary {
+  background-color: transparent;
+  border-color: $primary-color;
+  color: $primary-color;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-color;
+    color: $white;
+  }
+}
+
+// Bouton sur fond foncé (hero, encarts primaires).
+.btn--on-dark {
+  background-color: $white;
+  border-color: $white;
+  color: $primary-color;
+
+  &:hover:not(:disabled) {
+    background-color: $secondary-pale-green;
+    border-color: $secondary-pale-green;
+    color: $primary-color;
+  }
+}
+
+.btn--ghost-on-dark {
+  background-color: transparent;
+  border-color: rgba($white, 0.7);
+  color: $white;
+
+  &:hover:not(:disabled) {
+    background-color: rgba($white, 0.16);
+    border-color: $white;
+    color: $white;
+  }
+}
+
+.btn--block {
+  width: 100%;
+}
+
+// --- Liste à puces du Kit UI (puce terra cotta) ------------------------------
+.list-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    padding: $spacing-xs 0;
+    font-size: $font-size-base;
+    color: $black;
+
+    &::before {
+      content: '';
+      flex-shrink: 0;
+      width: 11px;
+      height: 11px;
+      margin-top: 6px;
+      background-image: url('/assets/images/puces/puce-terra-cotta.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+// --- Lien d'évitement ---------------------------------------------------------
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: $spacing-md;
+  z-index: $z-index-tooltip;
+  padding: $spacing-sm $spacing-md;
+  background-color: $primary-color;
+  color: $white;
+  border-radius: $border-radius-md;
+  transition: top $transition-fast;
+
+  &:focus {
+    top: $spacing-md;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}

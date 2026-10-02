@@ -1,0 +1,103 @@
+<section id="deploiement" class="deploy" aria-labelledby="deploiement-title">
+  <div class="deploy__inner">
+    <header class="deploy__head">
+      <p class="deploy__eyebrow">Déployer CICADA</p>
+      <h2 id="deploiement-title" class="deploy__title">Deux manières d'y venir</h2>
+      <p class="deploy__lead">
+        CICADA est un logiciel libre : vous pouvez l'installer sur vos propres serveurs, ou demander
+        à bénéficier de la plateforme hébergée par le projet. Les deux voies donnent accès aux mêmes
+        fonctionnalités — seule la charge d'exploitation change.
+      </p>
+    </header>
+
+    <div class="deploy__options">
+      <!-- Option 1 : installation autonome -->
+      <article class="option option--self">
+        <header class="option__head">
+          <span class="option__icon" aria-hidden="true">
+            <i class="fi fi-rr-disk"></i>
+          </span>
+          <div>
+            <p class="option__kicker">Option 1</p>
+            <h3 class="option__title">J'installe CICADA moi-même</h3>
+          </div>
+        </header>
+
+        <p class="option__intro">
+          Le code est public et la pile complète se lance par Docker Compose. Adapté aux structures
+          qui disposent d'une équipe technique et qui souhaitent garder la main sur leur
+          hébergement.
+        </p>
+
+        <ul class="option__list">
+          @for (point of selfHostedPoints; track point.text) {
+            <li>
+              <i class="fi" [class]="point.icon" aria-hidden="true"></i>
+              <span>{{ point.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="option__actions">
+          <a
+            class="btn btn--secondary"
+            [href]="config.installGuideUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fi fi-rr-book-alt" aria-hidden="true"></i>
+            Guide d'installation
+          </a>
+          <a
+            class="btn btn--secondary"
+            [href]="config.repositoryUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fi fi-rr-code-branch" aria-hidden="true"></i>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Option 2 : service hébergé par le projet -->
+      <article class="option option--saas">
+        <header class="option__head">
+          <span class="option__icon" aria-hidden="true">
+            <i class="fi fi-rr-cloud"></i>
+          </span>
+          <div>
+            <p class="option__kicker">Option 2</p>
+            <h3 class="option__title">Je demande la plateforme hébergée</h3>
+          </div>
+        </header>
+
+        <p class="option__intro">
+          Le projet opère pour vous une instance dédiée : vous disposez de votre propre espace,
+          administré par vos équipes, sans serveur à gérer.
+        </p>
+
+        <ul class="option__list">
+          @for (point of saasPoints; track point.text) {
+            <li>
+              <i class="fi" [class]="point.icon" aria-hidden="true"></i>
+              <span>{{ point.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="option__actions">
+          <a class="btn btn--on-dark" href="#contact">
+            <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+            Demander une instance hébergée
+          </a>
+        </div>
+
+        <p class="option__note">
+          Les conditions d'accès (éligibilité, convention, calendrier de mise en service) sont
+          précisées au cas par cas lors de la prise de contact.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

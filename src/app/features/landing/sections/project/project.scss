@@ -1,0 +1,128 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.project {
+  @include section-spacing;
+
+  background-color: $white;
+
+  &__inner {
+    @include container;
+  }
+
+  &__head {
+    max-width: 72ch;
+    margin-bottom: $spacing-xxl;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__lead {
+    @include section-lead;
+
+    margin-bottom: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xxl;
+  }
+
+  &__card {
+    padding: $spacing-lg;
+    background-color: $beige;
+    // Tuile asymétrique : rayon 18px sauf en haut à gauche (spec Kit UI).
+    border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+  }
+
+  &__card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: $spacing-md;
+    background-color: $secondary-pale-green;
+    border-radius: $border-radius-round;
+    color: $primary-color;
+    font-size: $font-size-h3;
+  }
+
+  &__card-title {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+
+  &__card-text {
+    margin: 0;
+    color: $black;
+  }
+
+  // Encart « construit avec les gestionnaires » : bandeau beige entre les
+  // tuiles et le bloc des porteurs du projet.
+  &__story {
+    margin-bottom: $spacing-xxl;
+    padding: $spacing-lg $spacing-xl;
+    background-color: $beige;
+    border-left: $border-width-accent solid $secondary-orange-salmon;
+    border-radius: 0 $border-radius-xl $border-radius-xl 0;
+  }
+
+  &__story-text {
+    max-width: 80ch;
+
+    p {
+      margin-bottom: $spacing-sm;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__story-label {
+    @include subtitle;
+
+    color: $secondary-terra-cotta;
+  }
+
+  &__story-note {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $gray-dark;
+  }
+
+  &__origin {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $spacing-xl;
+    padding: $spacing-xl;
+    background-color: $gray-lightest;
+    border-radius: $border-radius-xl;
+  }
+
+  &__origin-label {
+    @include subtitle;
+
+    color: $primary-color;
+  }
+
+  &__origin-text {
+    margin: 0 0 $spacing-lg;
+    color: $black;
+
+    strong {
+      font-weight: $font-weight-bold;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.legal {
+  @include section-spacing;
+
+  background-color: $white;
+
+  &__inner {
+    @include container(860px);
+  }
+
+  &__back {
+    margin-bottom: $spacing-lg;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+    }
+  }
+
+  &__title {
+    margin-bottom: $spacing-xl;
+    font-size: $font-size-h1;
+    line-height: 52px;
+  }
+
+  &__section {
+    margin-bottom: $spacing-xl;
+
+    h2 {
+      font-size: $font-size-h3;
+      line-height: $line-height-h3;
+    }
+
+    h3 {
+      margin-top: $spacing-lg;
+      font-size: $font-size-h4;
+      line-height: $line-height-h4;
+    }
+
+    p {
+      color: $black;
+    }
+  }
+
+  // Coordonnées d'une structure : une ligne par information, sans puce, pour
+  // rester lisible à côté des paragraphes.
+  &__identity {
+    margin: 0 0 $spacing-md;
+    padding: 0 0 0 $spacing-md;
+    list-style: none;
+    border-left: $border-width-thick solid $secondary-pale-green;
+
+    li {
+      padding: 2px 0;
+      color: $black;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .legal__title {
+    font-size: $font-size-h2;
+    line-height: $line-height-h2;
+  }
+}

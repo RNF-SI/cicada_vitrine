@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vitrine",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "source \"$HOME/.nvm/nvm.sh\" && nvm use >/dev/null && exec npm start"
+      ],
+      "port": 4200
+    }
+  ]
+}

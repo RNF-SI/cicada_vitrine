@@ -1,0 +1,73 @@
+<section id="ressources" class="resources" aria-labelledby="ressources-title">
+  <div class="resources__inner">
+    <header class="resources__head">
+      <p class="resources__eyebrow">Ressources</p>
+      <h2 id="ressources-title" class="resources__title">Documents de présentation</h2>
+      <p class="resources__lead">
+        À consulter en ligne avant de les diffuser : feuilletez le document dans la fenêtre
+        d'aperçu, puis téléchargez-le si vous en avez besoin.
+      </p>
+    </header>
+
+    <ul class="resources__grid">
+      @for (document of documents; track document.id) {
+        <li class="doc" [class.doc--unavailable]="!document.file">
+          <span class="doc__icon" aria-hidden="true">
+            <i class="fi" [class]="document.icon"></i>
+          </span>
+
+          <div class="doc__body">
+            <h3 class="doc__title">{{ document.title }}</h3>
+            <p class="doc__text">{{ document.description }}</p>
+
+            @if (document.file) {
+              <p class="doc__meta">Document PDF{{ document.size ? ' · ' + document.size : '' }}</p>
+              <div class="doc__actions">
+                <button type="button" class="btn btn--primary" (click)="preview(document)">
+                  <i class="fi fi-rr-eye" aria-hidden="true"></i>
+                  Aperçu
+                </button>
+                <a
+                  class="btn btn--secondary"
+                  [href]="document.file"
+                  [attr.download]="document.downloadName"
+                >
+                  <i class="fi fi-rr-download" aria-hidden="true"></i>
+                  Télécharger
+                </a>
+              </div>
+            } @else {
+              <p class="doc__pending">
+                <i class="fi fi-rr-clock" aria-hidden="true"></i>
+                Bientôt disponible
+              </p>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+
+    <div class="resources__links">
+      <h3 class="resources__links-title">Aller plus loin</h3>
+      <ul class="list-bullets">
+        <li>
+          <a [href]="config.docsUrl" target="_blank" rel="noopener">
+            Documentation du projet : guides utilisateur, administration et développement
+          </a>
+        </li>
+        <li>
+          <a [href]="config.installGuideUrl" target="_blank" rel="noopener">
+            Guide d'installation pas à pas
+          </a>
+        </li>
+        <li>
+          <a [href]="config.publicApiDocUrl" target="_blank" rel="noopener">
+            Documentation de l'API publique des plans de gestion
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <app-pdf-dialog />
+</section>

@@ -1,0 +1,142 @@
+// =============================================================================
+// Design tokens CICADA — Kit UI Biodiv' (11/2025)
+// =============================================================================
+// Source de vérité : Cicada/docs/DESIGN_SYSTEM.md et
+// Cicada/frontend/src/assets/scss/_variables.scss. Les valeurs sont reprises à
+// l'identique ; seule la syntaxe est modernisée (`@use 'sass:color'` au lieu des
+// fonctions `lighten()`/`darken()` dépréciées) pour éviter les avertissements
+// Dart Sass. Toute évolution de la charte doit partir du dépôt Cicada.
+// =============================================================================
+
+@use 'sass:color';
+
+// --- Couleur principale -------------------------------------------------------
+$primary-color: #025359; // Boutons & actions, navigation, titres
+$primary-hover: color.adjust($primary-color, $lightness: 8%);
+$primary-active: color.adjust($primary-color, $lightness: 15%);
+$primary-dark: color.adjust($primary-color, $lightness: -4%);
+
+// Primary translucides (hover / focus / badges discrets)
+$primary-bg-soft: rgba($primary-color, 0.05);
+$primary-bg-subtle: rgba($primary-color, 0.08);
+$primary-bg-light: rgba($primary-color, 0.1);
+$primary-bg-focus: rgba($primary-color, 0.12);
+$primary-bg-medium: rgba($primary-color, 0.2);
+
+// --- Couleurs secondaires (décoratives) --------------------------------------
+$secondary-yellow: #fec180;
+$secondary-yellow-light: #fedab3;
+$secondary-orange-salmon: #f5b399;
+$secondary-terra-cotta: #b74d5d; // AA sur fond blanc
+$secondary-pale-green: #c0e3cf;
+
+// --- Statuts ------------------------------------------------------------------
+$success-color: #04854b;
+$error-color: #e12329;
+$warning-color: #fa9965;
+$info-color: #81c9d8;
+
+// --- Tags (palette pastel, texte TOUJOURS $black) ----------------------------
+$tag-green: #cff1d3;
+$tag-cyan: #c1e5ec;
+$tag-orange: #ffe6cc;
+$tag-red: #ffc7c9;
+$tag-salmon: #f9cfbe;
+$tag-gray: #e4e4e4;
+
+// --- Neutres ------------------------------------------------------------------
+$black: #343433;
+$gray-dark: #746f6e; // AA sur fond blanc
+$gray: #c6c6c6;
+$gray-light: #e4e4e4;
+$gray-lighter: #e4e4e4;
+$gray-lightest: #f6f6f6;
+$beige: #f8f5f1; // Background de page
+$white: #ffffff;
+
+// --- Typographie --------------------------------------------------------------
+$font-family: 'Nunito', sans-serif;
+
+$font-size-h1: 43px;
+$font-size-h2: 29px;
+$font-size-h3: 22px;
+$font-size-h4: 18px;
+$font-size-subtitle: 14px;
+$font-size-base: 14px;
+$font-size-small: 13px;
+
+$line-height-h1: 65px;
+$line-height-h2: 43px;
+$line-height-h3: 32px;
+$line-height-h4: 27px;
+$line-height-base: 23px;
+$line-height-small: 20px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$letter-spacing-subtitle: 0.2em;
+
+// --- Espacements --------------------------------------------------------------
+$spacing-xxs: 4px;
+$spacing-xs: 7px;
+$spacing-sm: 11px;
+$spacing-md: 14px;
+$spacing-lg: 22px;
+$spacing-xl: 29px;
+$spacing-xxl: 43px;
+$page-gutter: 65px;
+$content-gutter: 72px;
+
+// --- Bordures & rayons --------------------------------------------------------
+$border-radius-sm: 4px;
+$border-radius-md: 7px;
+$border-radius-lg: 14px;
+$border-radius-xl: 18px;
+$border-radius-pill: 22px;
+$border-radius-round: 50%;
+
+$tile-border-radius: 0 $border-radius-xl $border-radius-xl 0;
+
+$border-width: 1px;
+$border-width-thick: 2px;
+$border-width-accent: 4px;
+
+// --- Ombres -------------------------------------------------------------------
+$shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 4px 7px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 7px 14px rgba(0, 0, 0, 0.2);
+$shadow-xs: 0 1px 2px rgba(10, 13, 18, 0.05);
+$shadow-dropdown:
+  0 12px 16px -4px rgba(10, 13, 18, 0.08),
+  0 4px 6px -2px rgba(10, 13, 18, 0.03);
+
+// --- Transitions --------------------------------------------------------------
+$transition-fast: 150ms ease-in-out;
+$transition-base: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// --- Breakpoints --------------------------------------------------------------
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+// --- Z-index ------------------------------------------------------------------
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// --- Composants ---------------------------------------------------------------
+$nav-height: 58px;
+$btn-padding-y: $spacing-sm;
+$btn-padding-x: $spacing-lg;
+
+// Largeur maximale du contenu de la vitrine.
+$container-max: 1180px;

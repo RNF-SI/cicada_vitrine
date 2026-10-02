@@ -1,0 +1,201 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.contact {
+  @include section-spacing;
+
+  background-color: $beige;
+
+  &__inner {
+    @include container;
+
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    gap: $spacing-xxl;
+    align-items: start;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__lead {
+    @include section-lead;
+
+    margin-bottom: $spacing-lg;
+  }
+
+  &__hints {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__matrix a {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__panel {
+    @include card;
+
+    padding: $spacing-xl;
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-medium;
+  }
+
+  // --- Confirmation d'envoi ---------------------------------------------------
+  &__success {
+    text-align: center;
+  }
+
+  &__success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: $spacing-md;
+    background-color: $success-color;
+    border-radius: $border-radius-round;
+    color: $white;
+    font-size: $font-size-h3;
+  }
+
+  &__success-title {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+    color: $primary-color;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-md;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xxs;
+  }
+
+  &__label {
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+  }
+
+  &__input {
+    padding: $spacing-sm $spacing-md;
+    background-color: $white;
+    border: $border-width solid $gray;
+    border-radius: $border-radius-sm;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $black;
+    transition:
+      border-color $transition-fast,
+      box-shadow $transition-fast;
+
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px $primary-bg-focus;
+      outline: none;
+    }
+
+    &[aria-invalid='true'] {
+      border-color: $error-color;
+    }
+
+    &--textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+  }
+
+  &__error {
+    margin: 0;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $error-color;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $black;
+    cursor: pointer;
+
+    input {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: $primary-color;
+    }
+  }
+
+  // Champ piège : hors écran plutôt que `display: none`, que certains robots
+  // savent détecter.
+  &__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  &__alert {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-xs;
+    margin: 0;
+    padding: $spacing-sm $spacing-md;
+    background-color: $tag-red;
+    border-radius: $border-radius-md;
+    color: $black;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__legal {
+    margin: 0;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $gray-dark;
+  }
+}
+
+@media (max-width: $breakpoint-desktop) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .contact__panel {
+    padding: $spacing-lg $spacing-md;
+  }
+}

@@ -1,0 +1,133 @@
+<header class="header" [class.header--scrolled]="scrolled()">
+  <div class="header__inner">
+    <a
+      routerLink="/"
+      fragment="top"
+      class="header__logo"
+      aria-label="CICADA — retour en haut de page"
+    >
+      <img
+        src="/assets/images/logo-cicada-2026.svg"
+        alt="CICADA"
+        width="284"
+        height="129"
+        class="header__logo-img"
+      />
+    </a>
+
+    <nav class="header__nav" aria-label="Sections de la page">
+      <ul class="header__nav-list">
+        @for (section of sections; track section.id) {
+          <li>
+            <a
+              class="header__nav-link"
+              [class.header__nav-link--active]="activeSection() === section.id"
+              routerLink="/"
+              [fragment]="section.id"
+              [attr.aria-current]="activeSection() === section.id ? 'true' : null"
+            >
+              {{ section.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <!-- Sous 576 px, le libellé est masqué : l'icône et `aria-label` suffisent,
+           et le logo garde la place dont il a besoin. -->
+      @if (config.appUrl) {
+        <a
+          class="btn btn--primary header__cta"
+          [href]="config.appUrl"
+          aria-label="Accéder à CICADA"
+        >
+          <i class="fi fi-rr-sign-in-alt" aria-hidden="true"></i>
+          <span class="header__cta-label">Accéder à CICADA</span>
+        </a>
+      } @else {
+        <a
+          class="btn btn--primary header__cta"
+          routerLink="/"
+          fragment="contact"
+          aria-label="Demander un accès"
+        >
+          <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+          <span class="header__cta-label">Demander un accès</span>
+        </a>
+      }
+
+      <button
+        type="button"
+        class="header__burger"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="header-drawer"
+        aria-label="Ouvrir le menu"
+        (click)="toggleMenu()"
+      >
+        <i class="fi fi-rr-menu-burger" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+@if (menuOpen()) {
+  <div class="header__overlay" (click)="closeMenu()"></div>
+}
+
+<!-- Menu latéral mobile : fond bleu primaire, barre active jaune (Kit UI). -->
+<nav
+  id="header-drawer"
+  class="drawer"
+  [class.drawer--open]="menuOpen()"
+  [attr.aria-hidden]="!menuOpen()"
+  aria-label="Menu"
+>
+  <button type="button" class="drawer__close" aria-label="Fermer le menu" (click)="closeMenu()">
+    <i class="fi fi-rr-cross" aria-hidden="true"></i>
+  </button>
+
+  <p class="drawer__label">Menu</p>
+
+  <ul class="drawer__list">
+    @for (section of sections; track section.id) {
+      <li>
+        <a
+          class="drawer__item"
+          [class.drawer__item--active]="activeSection() === section.id"
+          routerLink="/"
+          [fragment]="section.id"
+          [attr.tabindex]="menuOpen() ? null : -1"
+          (click)="closeMenu()"
+        >
+          {{ section.label }}
+        </a>
+      </li>
+    }
+  </ul>
+
+  <div class="drawer__footer">
+    <a
+      class="drawer__item"
+      [href]="config.repositoryUrl"
+      target="_blank"
+      rel="noopener"
+      [attr.tabindex]="menuOpen() ? null : -1"
+    >
+      <i class="fi fi-rr-code-branch" aria-hidden="true"></i>
+      Code source
+      <i class="fi fi-rr-arrow-up-right-from-square drawer__external" aria-hidden="true"></i>
+    </a>
+    <a
+      class="drawer__item"
+      [href]="config.matrixUrl"
+      target="_blank"
+      rel="noopener"
+      [attr.tabindex]="menuOpen() ? null : -1"
+    >
+      <i class="fi fi-rr-comments" aria-hidden="true"></i>
+      Salon Matrix
+      <i class="fi fi-rr-arrow-up-right-from-square drawer__external" aria-hidden="true"></i>
+    </a>
+  </div>
+</nav>

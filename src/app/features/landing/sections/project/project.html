@@ -1,0 +1,98 @@
+<section id="projet" class="project" aria-labelledby="projet-title">
+  <div class="project__inner">
+    <header class="project__head">
+      <p class="project__eyebrow">Le projet</p>
+      <h2 id="projet-title" class="project__title">
+        Un outil commun pour les gestionnaires d'aires protégées
+      </h2>
+      <p class="project__lead">
+        La méthodologie CT88 est le cadre de référence des plans de gestion de la plupart des aires
+        protégées. Elle ne disposait jusqu'ici d'aucun outil numérique librement accessible : les
+        plans vivaient dans des traitements de texte et des tableurs isolés, difficiles à suivre
+        dans le temps et impossibles à comparer d'un site à l'autre. CICADA comble ce manque.
+      </p>
+    </header>
+
+    <div class="project__grid">
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-bullseye-arrow"></i>
+        </span>
+        <h3 class="project__card-title">Un environnement structuré</h3>
+        <p class="project__card-text">
+          Un cadre de travail organisé autour du CT88, qui facilite la saisie et le suivi des plans,
+          mais aussi leur élaboration — en s'appuyant sur les indicateurs, enjeux et protocoles déjà
+          renseignés par d'autres.
+        </p>
+      </article>
+
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-chart-histogram"></i>
+        </span>
+        <h3 class="project__card-title">Un suivi qui sert au rapportage</h3>
+        <p class="project__card-text">
+          Temps humains, moyens financiers, calendrier, indicateurs d'état et de pression : les
+          données saisies alimentent le tableau de bord, les graphiques de bilan et les exports
+          attendus par les autorités de tutelle.
+        </p>
+      </article>
+
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-share"></i>
+        </span>
+        <h3 class="project__card-title">Une capitalisation entre réseaux</h3>
+        <p class="project__card-text">
+          Les plans publiés sont consultables par les autres gestionnaires. Plus les données sont
+          partagées, plus l'outil devient utile à tous : c'est le sens de la capitalisation
+          inter-réseaux que porte le projet.
+        </p>
+      </article>
+    </div>
+
+    <div class="project__story">
+      <div class="project__story-text">
+        <p class="project__story-label">Construit avec les gestionnaires</p>
+        <p>
+          Plusieurs outils ont été développés par le passé puis abandonnés, faute d'être adaptés au
+          travail réel des équipes. Les deux réseaux ont donc choisi d'associer étroitement les
+          gestionnaires à la conception : questionnaire de recueil des besoins diffusé en mai 2025,
+          atelier de consultation pour prioriser, puis un groupe de gestionnaires volontaires qui
+          accompagne le projet dans la durée, des maquettes au développement.
+        </p>
+        <p class="project__story-note">
+          <strong>Pourquoi « CICADA » ?</strong> Pour « Capitalisation Inter-réseaux pour la
+          Centralisation et l'Analyse des Données des Aires protégées » — et pour la cigale, symbole
+          d'un réseau vivant et connecté dans lequel l'information circule entre gestionnaires,
+          structures et territoires.
+        </p>
+      </div>
+    </div>
+
+    <div class="project__origin">
+      <div class="project__origin-block">
+        <p class="project__origin-label">À l'origine du projet</p>
+        <p class="project__origin-text">
+          CICADA est co-porté par
+          <strong>Réserves naturelles de France</strong> et la
+          <strong>Fédération des Conservatoires d'espaces naturels</strong>, les deux têtes de
+          réseau des gestionnaires d'espaces naturels protégés. Elles pilotent conjointement les
+          choix fonctionnels et méthodologiques de l'outil.
+        </p>
+        <app-partner-logos [partners]="foundingPartners" />
+      </div>
+
+      <div class="project__origin-block">
+        <p class="project__origin-label">En partenariat avec</p>
+        <p class="project__origin-text">
+          Le projet est mené en partenariat avec la LPO, PatriNat et l'Office français de la
+          biodiversité, dans le cadre du programme européen
+          <strong>LIFE BIODIV'FRANCE</strong>, cofinancé par l'Union européenne. Les mentions
+          complètes figurent en pied de page.
+        </p>
+        <app-partner-logos [partners]="associatedPartners" />
+      </div>
+    </div>
+  </div>
+</section>
