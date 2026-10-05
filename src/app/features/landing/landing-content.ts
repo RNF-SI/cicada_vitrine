@@ -146,7 +146,9 @@ export const NETWORK_POINTS: readonly DeploymentPoint[] = [
 export const SAAS_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-globe',
-    text: 'Votre nom de domaine.',
+    // La structure fournit le domaine : rien n'est acheté ni enregistré pour
+    // elle. Le dire ici évite une demande fondée sur un malentendu.
+    text: "Votre nom de domaine : vous nous déléguez un sous-domaine d'un domaine que vous possédez déjà.",
   },
   {
     icon: 'fi-rr-user-crown',
