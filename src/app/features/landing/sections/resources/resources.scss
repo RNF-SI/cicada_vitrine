@@ -1,0 +1,141 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.resources {
+  @include section-spacing;
+
+  background-color: $beige;
+
+  &__inner {
+    @include container;
+  }
+
+  &__head {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__lead {
+    @include section-lead;
+
+    margin-bottom: 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $spacing-lg;
+    margin: 0 0 $spacing-xxl;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__links {
+    padding: $spacing-lg $spacing-xl;
+    background-color: $white;
+    border-radius: $border-radius-xl;
+    border-left: $border-width-accent solid $secondary-terra-cotta;
+  }
+
+  &__links-title {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+}
+
+.doc {
+  @include card;
+
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+
+  &__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background-color: $secondary-pale-green;
+    border-radius: $border-radius-md;
+    color: $primary-color;
+    font-size: $font-size-h3;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-xs;
+    font-size: $font-size-h4;
+    line-height: $line-height-h4;
+    color: $primary-color;
+  }
+
+  &__text {
+    margin: 0 0 $spacing-sm;
+    color: $black;
+  }
+
+  &__meta {
+    margin: 0 0 $spacing-md;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $gray-dark;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  // Document annoncé mais pas encore livré : on le montre sans promettre un
+  // téléchargement qui échouerait.
+  &__pending {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin: 0;
+    padding: $spacing-xxs $spacing-sm;
+    background-color: $tag-orange;
+    border-radius: $border-radius-lg;
+    color: $black;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+  }
+
+  &--unavailable {
+    .doc__icon {
+      background-color: $gray-light;
+      color: $gray-dark;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .doc {
+    flex-direction: column;
+
+    &__actions .btn {
+      width: 100%;
+    }
+  }
+
+  .resources__links {
+    padding: $spacing-lg $spacing-md;
+  }
+}

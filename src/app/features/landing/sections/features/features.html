@@ -1,0 +1,85 @@
+<section id="fonctionnalites" class="features" aria-labelledby="fonctionnalites-title">
+  <div class="features__inner">
+    <header class="features__head">
+      <p class="features__eyebrow">Fonctionnalités</p>
+      <h2 id="fonctionnalites-title" class="features__title">Cinq modules complémentaires</h2>
+      <p class="features__lead">
+        Cicada a vocation à accompagner et faciliter la gestion de vos espaces protégés.
+      </p>
+    </header>
+
+    <ul class="features__grid">
+      @for (module of modules; track module.title) {
+        <li class="module" [class]="'module--' + module.accent">
+          <div class="module__head">
+            <span class="module__icon" aria-hidden="true">
+              <i class="fi" [class]="module.icon"></i>
+            </span>
+            <!-- Pastille réservée aux modules pas encore disponibles. -->
+            @if (module.availability) {
+              <span class="module__tag">{{ module.availability }}</span>
+            }
+          </div>
+          <h3 class="module__title">{{ module.title }}</h3>
+          <p class="module__text">{{ module.text }}</p>
+        </li>
+      }
+    </ul>
+
+    <!-- Gouvernance des données : qualifie l'accès au module « Exploration ». -->
+    <aside class="data-sharing">
+      <span class="data-sharing__icon" aria-hidden="true">
+        <i class="fi fi-rr-handshake"></i>
+      </span>
+      <div>
+        <h3 class="data-sharing__title">Explorer suppose de contribuer</h3>
+        <p class="data-sharing__text">
+          Le module d'exploration s'appuie sur une base commune : les données des différentes
+          instances de Cicada sont centralisées sur le serveur de Réserves naturelles de France. Y
+          accéder suppose donc d'y contribuer — le partage de vos propres données conditionne
+          l'accès à cette fonctionnalité, et relève d'un consentement explicite de votre structure
+          lors du déploiement d'une instance.
+        </p>
+      </div>
+    </aside>
+
+    <div class="features__cross">
+      <h3 class="features__subtitle">Et dans tous les modules</h3>
+      <ul class="features__cross-grid">
+        @for (item of crossFeatures; track item.title) {
+          <li class="cross">
+            <i class="fi cross__icon" [class]="item.icon" aria-hidden="true"></i>
+            <div>
+              <h4 class="cross__title">{{ item.title }}</h4>
+              <p class="cross__text">{{ item.text }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="features__roadmap">
+      <h3 class="features__subtitle">Un outil aux multiples perspectives d'évolution</h3>
+      <p class="features__roadmap-intro">
+        L'architecture modulaire permet des évolutions progressives. Les modules suivants sont
+        identifiés ; leur développement dépendra des financements mobilisés.
+      </p>
+      <ul class="list-bullets">
+        @for (item of roadmap; track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+      <p class="features__roadmap-note">
+        Le caractère ouvert du code permet par ailleurs à toute structure de contribuer ou de
+        développer ses propres modules, dans le respect de l'architecture commune.
+      </p>
+    </div>
+
+    <p class="features__more">
+      <a [href]="config.docsUrl" target="_blank" rel="noopener">
+        Consulter la documentation fonctionnelle
+        <i class="fi fi-rr-arrow-up-right-from-square" aria-hidden="true"></i>
+      </a>
+    </p>
+  </div>
+</section>

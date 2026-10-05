@@ -1,0 +1,57 @@
+<section id="communaute" class="community" aria-labelledby="communaute-title">
+  <div class="community__inner">
+    <header class="community__head">
+      <p class="community__eyebrow">Communauté</p>
+      <h2 id="communaute-title" class="community__title">Un développement ouvert</h2>
+      <p class="community__lead">
+        Cicada se construit au grand jour : les échanges techniques, les anomalies et les évolutions
+        sont publics. Développeurs, administrateurs et gestionnaires curieux sont bienvenus.
+      </p>
+    </header>
+
+    <div class="community__grid">
+      <article class="channel channel--matrix">
+        <span class="channel__icon" aria-hidden="true">
+          <i class="fi fi-rr-comments"></i>
+        </span>
+        <h3 class="channel__title">Salon Matrix des développeurs</h3>
+        <p class="channel__text">
+          Les discussions techniques du projet se tiennent sur Matrix : questions d'installation,
+          choix d'architecture, entraide entre instances. Le salon est ouvert et consultable avec
+          n'importe quel client Matrix.
+        </p>
+        <p class="channel__address">
+          <code>{{ config.matrixRoom }}</code>
+        </p>
+        <a class="btn btn--primary" [href]="config.matrixUrl" target="_blank" rel="noopener">
+          <i class="fi fi-rr-comment-alt" aria-hidden="true"></i>
+          Rejoindre le salon
+        </a>
+      </article>
+
+      <article class="channel">
+        <span class="channel__icon" aria-hidden="true">
+          <i class="fi fi-rr-code-branch"></i>
+        </span>
+        <h3 class="channel__title">Code source et anomalies</h3>
+        <p class="channel__text">
+          Le dépôt public accueille le code, les demandes d'évolution et les signalements
+          d'anomalie. Les contributions sont examinées par l'équipe du projet.
+        </p>
+        <div class="channel__actions">
+          <a
+            class="btn btn--secondary"
+            [href]="config.repositoryUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            Voir le dépôt
+          </a>
+          <a class="btn btn--secondary" [href]="config.issuesUrl" target="_blank" rel="noopener">
+            Signaler une anomalie
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

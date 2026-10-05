@@ -1,0 +1,153 @@
+<section id="deploiement" class="deploy" aria-labelledby="deploiement-title">
+  <div class="deploy__inner">
+    <header class="deploy__head">
+      <p class="deploy__eyebrow">Déployer Cicada</p>
+      <h2 id="deploiement-title" class="deploy__title">Trois manières d'y venir</h2>
+      <p class="deploy__lead">
+        Cicada est un logiciel libre. Installez-le sur vos serveurs, rejoignez l'instance de votre
+        tête de réseau, ou confiez son exploitation à Réserves naturelles de France.
+      </p>
+    </header>
+
+    <div class="deploy__options">
+      <!-- Option 1 : installation autonome -->
+      <article class="option option--self">
+        <header class="option__head">
+          <span class="option__icon" aria-hidden="true">
+            <i class="fi fi-rr-disk"></i>
+          </span>
+          <div>
+            <p class="option__kicker">Option 1</p>
+            <h3 class="option__title">J'installe Cicada moi-même</h3>
+          </div>
+        </header>
+
+        <p class="option__intro">
+          Pour les structures qui disposent d'une équipe technique et veulent garder la main sur
+          leur hébergement.
+        </p>
+
+        <ul class="option__list">
+          @for (point of selfHostedPoints; track point.text) {
+            <li>
+              <i class="fi" [class]="point.icon" aria-hidden="true"></i>
+              <span>{{ point.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="option__actions">
+          <a
+            class="btn btn--secondary"
+            [href]="config.installGuideUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fi fi-rr-book-alt" aria-hidden="true"></i>
+            Guide d'installation
+          </a>
+          <a
+            class="btn btn--secondary"
+            [href]="config.repositoryUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fi fi-rr-code-branch" aria-hidden="true"></i>
+            Code source
+          </a>
+        </div>
+      </article>
+
+      <!-- Option 2 : instance de la tête de réseau -->
+      <article class="option option--network">
+        <header class="option__head">
+          <span class="option__icon" aria-hidden="true">
+            <i class="fi fi-rr-users-alt"></i>
+          </span>
+          <div>
+            <p class="option__kicker">Option 2</p>
+            <h3 class="option__title">J'utilise l'instance de mon réseau</h3>
+          </div>
+        </header>
+
+        <p class="option__intro">
+          Vous gérez une réserve naturelle, ou vous êtes un Conservatoire d'espaces naturels ? Les
+          deux têtes de réseau — <strong>RNF</strong> et la <strong>FCEN</strong> — mettent leurs
+          instances à votre disposition, librement et gratuitement.
+        </p>
+
+        <ul class="option__list">
+          @for (point of networkPoints; track point.text) {
+            <li>
+              <i class="fi" [class]="point.icon" aria-hidden="true"></i>
+              <span>{{ point.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <!-- Les deux instances sont ouvertes : on y envoie directement plutôt
+             que de faire passer par le formulaire de contact. -->
+        <div class="option__actions">
+          <a class="btn btn--primary" [href]="config.rnfInstanceUrl" target="_blank" rel="noopener">
+            <i class="fi fi-rr-sign-in-alt" aria-hidden="true"></i>
+            Cicada RNF
+          </a>
+          <a
+            class="btn btn--primary"
+            [href]="config.fcenInstanceUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="fi fi-rr-sign-in-alt" aria-hidden="true"></i>
+            Cicada FCEN
+          </a>
+        </div>
+      </article>
+
+      <!-- Option 3 : service hébergé, opéré par RNF -->
+      <article class="option option--saas">
+        <header class="option__head">
+          <span class="option__icon" aria-hidden="true">
+            <i class="fi fi-rr-cloud"></i>
+          </span>
+          <div>
+            <p class="option__kicker">Option 3</p>
+            <h3 class="option__title">Je passe par le service hébergé</h3>
+          </div>
+        </header>
+
+        <p class="option__intro">
+          Pour une structure hors des deux réseaux, ou qui souhaite sa propre instance dédiée :
+          <strong>Réserves naturelles de France</strong> vous propose une sous-traitance
+          d'installation et de maintenance.
+        </p>
+
+        <ul class="option__list">
+          @for (point of saasPoints; track point.text) {
+            <li>
+              <i class="fi" [class]="point.icon" aria-hidden="true"></i>
+              <span>{{ point.text }}</span>
+            </li>
+          }
+        </ul>
+
+        <!-- Le caractère payant est annoncé avant le bouton, pas en note de bas
+             de bloc : personne ne doit l'apprendre après avoir pris contact. -->
+        <p class="option__pricing">
+          <i class="fi fi-rr-seedling" aria-hidden="true"></i>
+          <span>
+            Ce service est <strong>payant</strong>. Les recettes contribuent aussi au financement du
+            développement de Cicada, qui reste libre et gratuit à installer.
+          </span>
+        </p>
+
+        <div class="option__actions">
+          <a class="btn btn--on-dark" href="#contact">
+            <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+            Demander un devis
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

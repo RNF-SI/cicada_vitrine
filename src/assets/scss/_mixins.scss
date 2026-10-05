@@ -1,0 +1,103 @@
+// =============================================================================
+// Mixins de mise en page de la vitrine
+// =============================================================================
+// Ne contient que des helpers de layout : les valeurs viennent de `_tokens.scss`.
+
+@use 'tokens' as *;
+
+/// Conteneur centré, gouttières alignées sur `$page-gutter` du Kit UI.
+@mixin container($max: $container-max) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $page-gutter;
+
+  @media (max-width: $breakpoint-desktop) {
+    padding-inline: $spacing-xl;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding-inline: $spacing-md;
+  }
+}
+
+/// Rythme vertical d'une section de la page unique.
+@mixin section-spacing {
+  padding-block: calc($spacing-xxl * 2);
+
+  @media (max-width: $breakpoint-tablet) {
+    padding-block: $spacing-xxl;
+  }
+}
+
+/// Surtitre : Bold, uppercase, letter-spacing 20% (spec Kit UI « subtitle »).
+@mixin subtitle {
+  margin: 0 0 $spacing-sm;
+  font-size: $font-size-subtitle;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-base;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-subtitle;
+  color: $secondary-terra-cotta; // AA sur fond blanc et sur beige
+}
+
+/// Titre de section (h2 du Kit UI).
+@mixin section-title {
+  margin: 0 0 $spacing-md;
+  font-size: $font-size-h2;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-h2;
+  color: $primary-color;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+  }
+}
+
+/// Chapô d'une section.
+@mixin section-lead {
+  margin: 0 0 $spacing-xl;
+  font-size: $font-size-h4;
+  font-weight: $font-weight-regular;
+  line-height: 28px;
+  color: $gray-dark;
+}
+
+/// Carte blanche standard (rayon et ombre du Kit UI).
+@mixin card {
+  background-color: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-light;
+}
+
+/// Bague de focus visible, homogène sur tous les éléments interactifs.
+@mixin focus-ring($color: $primary-color) {
+  outline: $border-width-thick solid $color;
+  outline-offset: 2px;
+}
+
+/// Motif de vagues du Kit UI, posé en fond d'un bloc coloré.
+@mixin waves-pattern($image: '/assets/images/banner-waves.png') {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url($image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right center;
+  pointer-events: none;
+}
+
+/// Masque les éléments visuellement tout en les laissant aux lecteurs d'écran.
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

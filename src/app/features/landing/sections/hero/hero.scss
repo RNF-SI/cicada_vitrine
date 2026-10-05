@@ -1,0 +1,112 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+.hero {
+  padding-block: calc($spacing-xxl * 1.5) calc($spacing-xxl * 2);
+  background-color: $beige;
+  text-align: center;
+
+  &__inner {
+    @include container(900px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // Le logo est l'élément dominant du bloc : d'où une largeur en pourcentage de
+  // la colonne, bornée pour ne pas devenir démesurée sur un grand écran.
+  &__logo {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-md;
+    font-size: $font-size-h1;
+    line-height: 52px;
+    color: $primary-color;
+  }
+
+  &__lead {
+    margin: 0 0 $spacing-xl;
+    font-size: $font-size-h4;
+    line-height: 28px;
+    color: $gray-dark;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // Pastilles de réassurance : vert pâle décoratif + texte primaire (AA).
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xxs $spacing-sm;
+    background-color: $secondary-pale-green;
+    border-radius: $border-radius-pill;
+    color: $primary-color;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+
+    i {
+      font-size: $font-size-base;
+      line-height: 1;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .hero {
+    padding-block: $spacing-xl calc($spacing-xxl * 1.2);
+
+    &__logo {
+      max-width: 320px;
+      margin-bottom: $spacing-lg;
+    }
+
+    &__title {
+      font-size: $font-size-h2;
+      line-height: $line-height-h2;
+    }
+
+    &__lead {
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .hero {
+    &__logo {
+      max-width: 260px;
+    }
+
+    &__actions {
+      width: 100%;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+# Configuration Apache de la vitrine CICADA (hébergement OVH).
+#
+# Le site est entièrement prérendu : Apache sert des fichiers HTML, il n'y a pas
+# de routeur côté serveur à prévoir. Seul `/api/contact.php` est dynamique.
+
+# --- HTTPS obligatoire --------------------------------------------------------
+# Turnstile, qui protège le formulaire de contact, refuse de fonctionner hors
+# contexte sécurisé : sans HTTPS, le captcha ne se charge pas et aucune demande
+# ne part. Le formulaire recueille par ailleurs des données personnelles, qui
+# n'ont pas à circuler en clair.
+#
+# On teste `X-Forwarded-Proto` et non `%{HTTPS}` : l'hébergement mutualisé OVH
+# place un proxy devant Apache, qui voit donc toujours du HTTP en interne.
+#
+# ⚠️ Ne déployer cette règle qu'une fois le certificat délivré. Activée trop
+# tôt, elle redirige les visiteurs vers une adresse qui n'aboutit pas.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# --- Page d'erreur ------------------------------------------------------------
+# Une URL inconnue renvoie l'accueil, comme la route `**` de l'application.
+ErrorDocument 404 /index.html
+
+# --- Sécurité -----------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Le site ne s'affiche pas dans une iframe tierce.
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # Pas de reniflage de type MIME.
+  Header always set X-Content-Type-Options "nosniff"
+  # Le référent complet n'est transmis qu'au sein du site.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Le fichier de configuration vit au-dessus de la racine web, mais par
+# précaution on refuse de servir tout fichier qui porterait ce nom.
+<Files "cicada-vitrine-config.php">
+  Require all denied
+</Files>
+
+# --- Compression --------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Cache --------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Les fichiers JS et CSS portent une empreinte dans leur nom : ils peuvent
+  # être mis en cache sans limite, un nouveau build produit de nouveaux noms.
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 year"
+  </FilesMatch>
+
+  # Images, polices et PDF : un mois, ils changent rarement et gardent leur nom.
+  <FilesMatch "\.(jpg|jpeg|png|svg|webp|woff2|pdf)$">
+    ExpiresDefault "access plus 1 month"
+  </FilesMatch>
+
+  # Le HTML, lui, doit être revalidé : c'est lui qui pointe vers les empreintes.
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+  </FilesMatch>
+</IfModule>

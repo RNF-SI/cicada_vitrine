@@ -1,0 +1,52 @@
+<section id="top" class="hero">
+  <div class="hero__inner">
+    <!-- Le logo porte à lui seul l'identification : il est la première et la
+         plus grande chose que l'on voit en arrivant. -->
+    <img
+      src="/assets/images/logo-cicada-2026.svg"
+      alt="Cicada"
+      class="hero__logo"
+      width="284"
+      height="129"
+      fetchpriority="high"
+    />
+
+    <h1 class="hero__title">Suivre, analyser et valoriser la gestion des aires protégées</h1>
+
+    <p class="hero__lead">
+      Entre suivi du plan de gestion, facilitation de la mise en réseau et bancarisation des données
+      de gestion, Cicada offre une solution complète pour les gestionnaires d'aires protégées
+      utilisant la méthode CT88.
+    </p>
+
+    <div class="hero__actions">
+      @if (config.appUrl) {
+        <a class="btn btn--primary" [href]="config.appUrl">
+          <i class="fi fi-rr-sign-in-alt" aria-hidden="true"></i>
+          Accéder à Cicada
+        </a>
+      } @else {
+        <a class="btn btn--primary" href="#deploiement">
+          <i class="fi fi-rr-rocket-lunch" aria-hidden="true"></i>
+          Déployer Cicada
+        </a>
+      }
+      <a class="btn btn--secondary" href="#fonctionnalites"> Découvrir les fonctionnalités </a>
+    </div>
+
+    <ul class="hero__badges">
+      <li class="hero__badge">
+        <i class="fi fi-rr-unlock" aria-hidden="true"></i>
+        Logiciel libre (GNU GPL v3)
+      </li>
+      <li class="hero__badge">
+        <i class="fi fi-rr-handshake" aria-hidden="true"></i>
+        Porté par RNF et la FCEN
+      </li>
+      <li class="hero__badge">
+        <i class="fi fi-rr-users-alt" aria-hidden="true"></i>
+        Coconstruit avec les gestionnaires
+      </li>
+    </ul>
+  </div>
+</section>

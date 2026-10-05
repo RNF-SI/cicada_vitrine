@@ -1,0 +1,32 @@
+<section id="sortie" class="release" aria-labelledby="sortie-title">
+  <div class="release__inner">
+    <div class="release__text">
+      <p class="release__eyebrow">Rendez-vous</p>
+      <h2 id="sortie-title" class="release__title">{{ event.title }}</h2>
+      <p class="release__date">
+        <i class="fi fi-rr-calendar" aria-hidden="true"></i>
+        {{ event.dateLabel }}
+      </p>
+      <p class="release__text-lead">{{ event.text }}</p>
+    </div>
+
+    @if (countdown()) {
+      <!-- Chiffres masqués aux lecteurs d'écran : la date en toutes lettres
+           ci-contre porte déjà l'information, et un compteur annoncé chaque
+           seconde rendrait la page inaudible. -->
+      <ul class="release__units" aria-hidden="true">
+        @for (unit of units(); track unit.label) {
+          <li class="release__unit">
+            <span class="release__value">{{ unit.value }}</span>
+            <span class="release__label">{{ unit.label }}</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="release__past">
+        <i class="fi fi-rr-party-horn" aria-hidden="true"></i>
+        La version 1 est sortie.
+      </p>
+    }
+  </div>
+</section>

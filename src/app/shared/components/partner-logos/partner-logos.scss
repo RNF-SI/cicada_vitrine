@@ -1,0 +1,75 @@
+@use 'tokens' as *;
+
+.partners {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    padding: $spacing-xs;
+    border-radius: $border-radius-md;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background-color: $primary-bg-subtle;
+      text-decoration: none;
+    }
+  }
+
+  // Les logos fournis sont transparents : aucun fond n'est ajouté ici. Le pied
+  // de page, lui, est bleu-vert et en remet un (cf. footer.scss).
+  //
+  // Les proportions vont du simple au quadruple d'un logo à l'autre (celui des
+  // Conservatoires est trois fois plus large que haut, celui de la LPO est plus
+  // haut que large). Brider la largeur autant que la hauteur évite qu'un logo
+  // très allongé n'écrase les autres : chacun s'inscrit dans la même boîte.
+  &__logo {
+    // Hauteur définie plutôt que `max-height` : le logo de RNF est un SVG sans
+    // attributs `width`/`height`, qui s'effondre à 0×0 si les deux dimensions
+    // sont en `auto`. Son `viewBox` suffit ensuite à déduire la largeur.
+    height: 64px;
+    width: auto;
+    // Bride les logos très allongés (celui des Conservatoires est trois fois
+    // plus large que haut) pour qu'aucun n'écrase ses voisins. `object-fit`
+    // garantit que ce bridage réduit l'image au lieu de l'écraser.
+    max-width: 160px;
+    object-fit: contain;
+  }
+
+  // Pastille de repli : terra cotta sur fond blanc, combinaison AA.
+  &__fallback {
+    display: inline-flex;
+    align-items: center;
+    padding: $spacing-xs $spacing-md;
+    border: $border-width-thick solid $secondary-terra-cotta;
+    border-radius: $border-radius-pill;
+    color: $secondary-terra-cotta;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+
+  &--compact {
+    gap: $spacing-sm;
+
+    .partners__logo {
+      height: 44px;
+      max-width: 130px;
+    }
+
+    .partners__fallback {
+      padding: $spacing-xxs $spacing-sm;
+      font-size: $font-size-small;
+    }
+  }
+}

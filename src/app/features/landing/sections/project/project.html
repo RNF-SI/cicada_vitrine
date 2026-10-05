@@ -1,0 +1,91 @@
+<section id="projet" class="project" aria-labelledby="projet-title">
+  <div class="project__inner">
+    <header class="project__head">
+      <p class="project__eyebrow">Le projet</p>
+      <h2 id="projet-title" class="project__title">
+        Un outil commun pour les gestionnaires d'aires protégées
+      </h2>
+      <p class="project__lead">
+        La méthodologie CT88 est le cadre de référence des plans de gestion de la plupart des aires
+        protégées. Elle ne disposait jusqu'ici d'aucun outil numérique libre permettant
+        d'accompagner son cycle de vie tout en facilitant la remontée et la valorisation des données
+        à l'échelle réseau. Cicada comble ce manque.
+      </p>
+    </header>
+
+    <div class="project__grid">
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-bullseye-arrow"></i>
+        </span>
+        <h3 class="project__card-title">Un environnement structuré CT88</h3>
+        <p class="project__card-text">
+          Un cadre de travail organisé autour du CT88, qui facilite la saisie et le suivi des plans,
+          mais aussi leur élaboration en s'appuyant sur les indicateurs, enjeux et suivi déjà
+          renseignés par d'autres et consultables dans le module exploration des données.
+        </p>
+      </article>
+
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-chart-histogram"></i>
+        </span>
+        <h3 class="project__card-title">Un suivi qui sert au rapportage</h3>
+        <p class="project__card-text">
+          Temps humains, moyens financiers, calendrier, indicateurs d'état et de pression : les
+          données saisies alimentent le tableau de bord, les graphiques de bilan et les exports.
+        </p>
+      </article>
+
+      <article class="project__card">
+        <span class="project__card-icon" aria-hidden="true">
+          <i class="fi fi-rr-share"></i>
+        </span>
+        <h3 class="project__card-title">Une capitalisation entre réseaux</h3>
+        <p class="project__card-text">
+          Les arborescences des plans publiés sont consultables par les autres gestionnaires. Plus
+          les données sont partagées, plus l'outil devient utile à tous.
+        </p>
+      </article>
+    </div>
+
+    <div class="project__story">
+      <div class="project__story-text">
+        <p class="project__story-label">Une construction collaborative avec les gestionnaires</p>
+        <p>
+          Plusieurs outils ont été développés par le passé puis abandonnés, faute d'être adaptés au
+          travail réel des équipes. Les deux réseaux ont donc choisi d'associer étroitement les
+          gestionnaires à la conception : questionnaire de recueil des besoins, atelier de
+          priorisation, création d'un groupe de gestionnaires volontaires accompagnant le projet
+          dans la durée, des maquettes au développement. L'objectif à terme est de créer une
+          communauté autour de l'outil.
+        </p>
+      </div>
+    </div>
+
+    <div class="project__origin">
+      <div class="project__origin-block">
+        <p class="project__origin-label">Un co-portage</p>
+        <p class="project__origin-text">
+          Cicada est co-porté par
+          <strong>Réserves naturelles de France</strong> et la
+          <strong>Fédération des Conservatoires d'espaces naturels</strong>, deux têtes de réseau
+          des gestionnaires d'espaces naturels protégés. Elles pilotent conjointement les choix
+          fonctionnels et méthodologiques de l'outil.
+        </p>
+        <app-partner-logos [partners]="foundingPartners" />
+      </div>
+
+      <div class="project__origin-block">
+        <p class="project__origin-label">En partenariat avec</p>
+        <p class="project__origin-text">
+          Le projet est mené en partenariat avec la LPO, PatriNat et l'Office français de la
+          biodiversité, dans le cadre du programme européen
+          <strong>LIFE BIODIV'FRANCE</strong>, cofinancé par l'Union européenne et le ministère de
+          la Transition écologique.
+        </p>
+        <app-partner-logos [partners]="associatedPartners" />
+      </div>
+    </div>
+  </div>
+</section>
