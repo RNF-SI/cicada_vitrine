@@ -1,0 +1,83 @@
+<article class="faq">
+  <div class="faq__inner">
+    <p class="faq__back">
+      <a routerLink="/">
+        <i class="fi fi-rr-arrow-left" aria-hidden="true"></i>
+        Retour à l'accueil
+      </a>
+    </p>
+
+    <h1 class="faq__title">Questions fréquentes</h1>
+    <p class="faq__lead">
+      Ce que les gestionnaires nous demandent le plus souvent à propos de Cicada : ce que fait
+      l'outil, où saisir ses données, ce qu'il advient de celles-ci. Si votre question n'y figure
+      pas, <a routerLink="/" fragment="contact">écrivez-nous</a>.
+    </p>
+
+    <!-- Sommaire : la page est volontairement dépliée, il compense sa longueur. -->
+    <nav class="faq__summary" aria-label="Sommaire des questions">
+      @for (topic of topics; track topic.id) {
+        <div class="faq__summary-group">
+          <p class="faq__summary-title">{{ topic.title }}</p>
+          <ul>
+            @for (entry of topic.entries; track entry.id) {
+              <li>
+                <!-- `routerLink` et non `href="#id"` : avec `<base href="/">`,
+                     une ancre nue se résout contre la racine et ramène à
+                     l'accueil au lieu de descendre dans la page. -->
+                <a routerLink="/faq" [fragment]="entry.id">{{ entry.question }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </nav>
+
+    @for (topic of topics; track topic.id) {
+      <section class="faq__topic" [attr.aria-labelledby]="topic.id">
+        <h2 [id]="topic.id" class="faq__topic-title">{{ topic.title }}</h2>
+
+        @for (entry of topic.entries; track entry.id) {
+          <div class="faq__entry">
+            <h3 [id]="entry.id" class="faq__question">{{ entry.question }}</h3>
+            @for (paragraph of entry.answer; track paragraph) {
+              <p class="faq__answer">{{ paragraph }}</p>
+            }
+            @if (entry.link; as link) {
+              <p class="faq__link">
+                @if (link.href) {
+                  <a [href]="link.href" target="_blank" rel="noopener">
+                    {{ link.label }}
+                    <i class="fi fi-rr-arrow-up-right-from-square" aria-hidden="true"></i>
+                  </a>
+                } @else {
+                  <a [routerLink]="link.route" [fragment]="link.fragment">
+                    {{ link.label }}
+                    <i class="fi fi-rr-arrow-right" aria-hidden="true"></i>
+                  </a>
+                }
+              </p>
+            }
+          </div>
+        }
+      </section>
+    }
+
+    <aside class="faq__contact">
+      <span class="faq__contact-icon" aria-hidden="true">
+        <i class="fi fi-rr-paper-plane"></i>
+      </span>
+      <div>
+        <h2 class="faq__contact-title">Une question qui n'est pas là ?</h2>
+        <p class="faq__contact-text">
+          L'équipe du projet répond aux demandes des gestionnaires, qu'il s'agisse d'un choix
+          d'instance, d'une question de méthode ou d'un point technique.
+        </p>
+        <a class="btn btn--primary" routerLink="/" fragment="contact">
+          <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
+          Nous écrire
+        </a>
+      </div>
+    </aside>
+  </div>
+</article>
