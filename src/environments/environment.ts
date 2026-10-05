@@ -13,4 +13,14 @@ export const environment = {
    * `cicada-vitrine-config.php`.
    */
   turnstileSiteKey: '0x4AAAAAAFL8xLrsYqr2TfAe',
+
+  /**
+   * Instance Matomo de Réserves naturelles de France, qui héberge la mesure
+   * d'audience de la vitrine. Sans slash final : le service y ajoute lui-même
+   * `/matomo.php` et `/matomo.js`.
+   */
+  matomoUrl: 'https://matomo.reserves-naturelles.org' as string | null,
+
+  /** Identifiant du site « vitrine CICADA » dans cette instance. */
+  matomoSiteId: '11',
 };

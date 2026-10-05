@@ -53,7 +53,25 @@ rsync -av --delete dist/cicada-vitrine/browser/ <compte>@ftp.cluster0XX.hosting.
 build. Attention : il ne faut pas que `cicada-vitrine-config.php` se trouve dans
 `www`, sinon il serait supprimé — et il n'a de toute façon rien à y faire.
 
-## 4. Vérifier
+## 4. Activer le certificat SSL
+
+Dans l'espace client OVH : **Hébergements → onglet Multisite**, activer l'option
+SSL sur le domaine, puis **onglet SSL** demander un certificat Let's Encrypt
+(gratuit). Compter de quelques minutes à une heure.
+
+C'est un prérequis, pas une finition : le captcha Cloudflare Turnstile refuse de
+fonctionner hors contexte sécurisé, et le formulaire ne part donc pas en HTTP.
+
+Vérifier avant d'aller plus loin :
+
+```bash
+curl -sI https://votre-domaine/ | head -1
+```
+
+Tant que la réponse n'est pas `HTTP/2 200`, **ne pas téléverser le `.htaccess`** :
+il force la redirection vers HTTPS et rendrait le site injoignable.
+
+## 5. Vérifier
 
 ```bash
 curl -i https://votre-domaine/api/contact.php

@@ -54,4 +54,14 @@ export const SITE_CONFIG = {
    * refuserait `localhost`.
    */
   turnstileSiteKey: environment.turnstileSiteKey,
+
+  /**
+   * Mesure d'audience (Matomo), cf. `core/matomo.ts`.
+   *
+   * Vient de `src/environments/` : l'instance de Réserves naturelles de France
+   * en production, `null` en développement — auquel cas aucun script n'est
+   * chargé et aucune visite n'est comptée.
+   */
+  matomoUrl: environment.matomoUrl,
+  matomoSiteId: environment.matomoSiteId,
 } as const;

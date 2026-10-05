@@ -8,6 +8,7 @@ import {
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
+import { Matomo } from './core/matomo';
 import { Footer } from './shared/components/footer/footer';
 import { Header } from './shared/components/header/header';
 
@@ -29,6 +30,7 @@ export class App {
   constructor() {
     const router = inject(Router);
     const destroyRef = inject(DestroyRef);
+    const matomo = inject(Matomo);
 
     // Les liens du bandeau et du pied de page sont des `routerLink` avec
     // fragment, car ils doivent ramener à l'accueil depuis les mentions
@@ -41,6 +43,10 @@ export class App {
     // autre page, elle, est prise en charge par le composant `Landing`, qui
     // sait quand ses sections sont rendues.
     afterNextRender(() => {
+      // Mesure d'audience : uniquement dans le navigateur, et après le premier
+      // rendu — le prérendu statique ne doit compter aucune visite.
+      matomo.start();
+
       const subscription = router.events
         .pipe(filter((event) => event instanceof NavigationEnd))
         .subscribe(() => {

@@ -3,6 +3,23 @@
 # Le site est entièrement prérendu : Apache sert des fichiers HTML, il n'y a pas
 # de routeur côté serveur à prévoir. Seul `/api/contact.php` est dynamique.
 
+# --- HTTPS obligatoire --------------------------------------------------------
+# Turnstile, qui protège le formulaire de contact, refuse de fonctionner hors
+# contexte sécurisé : sans HTTPS, le captcha ne se charge pas et aucune demande
+# ne part. Le formulaire recueille par ailleurs des données personnelles, qui
+# n'ont pas à circuler en clair.
+#
+# On teste `X-Forwarded-Proto` et non `%{HTTPS}` : l'hébergement mutualisé OVH
+# place un proxy devant Apache, qui voit donc toujours du HTTP en interne.
+#
+# ⚠️ Ne déployer cette règle qu'une fois le certificat délivré. Activée trop
+# tôt, elle redirige les visiteurs vers une adresse qui n'aboutit pas.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
 # --- Page d'erreur ------------------------------------------------------------
 # Une URL inconnue renvoie l'accueil, comme la route `**` de l'application.
 ErrorDocument 404 /index.html

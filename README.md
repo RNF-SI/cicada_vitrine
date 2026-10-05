@@ -20,14 +20,14 @@ nvm use && npm install && npm start
 Le site est servi sur <http://localhost:4200>. Le formulaire de contact a besoin
 de la fonction serverless : voir « Formulaire de contact » plus bas.
 
-| Commande | Effet |
-|----------|-------|
-| `npm start` | Serveur de développement, avec proxy `/api` vers l'endpoint local |
-| `npm run build` | Build prérendu dans `dist/cicada-vitrine/browser`, fichiers Apache compris |
-| `npm test` | Tests unitaires (Vitest) |
-| `npm run format` | Prettier sur `src/` et `functions/` |
-| `npm run api` | Endpoint de contact en local (PHP, port 8788) |
-| `npm run typecheck:api` | Typage de la variante Cloudflare |
+| Commande                | Effet                                                                      |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `npm start`             | Serveur de développement, avec proxy `/api` vers l'endpoint local          |
+| `npm run build`         | Build prérendu dans `dist/cicada-vitrine/browser`, fichiers Apache compris |
+| `npm test`              | Tests unitaires (Vitest)                                                   |
+| `npm run format`        | Prettier sur `src/` et `functions/`                                        |
+| `npm run api`           | Endpoint de contact en local (PHP, port 8788)                              |
+| `npm run typecheck:api` | Typage de la variante Cloudflare                                           |
 
 ## Design
 
@@ -51,8 +51,9 @@ src/app/
   features/landing/       La page : une section par composant, contenu éditorial
                           centralisé dans landing-content.ts
   features/legal/         Mentions légales et données personnelles
-src/environments/         Clé publique du captcha : la vraie en production, celle
-                          de test en développement (substitution par ng serve)
+src/environments/         Clé publique du captcha et instance Matomo : les vraies
+                          valeurs en production, neutralisées en développement
+                          (substitution par ng serve)
 deploy/ovh/www/api/contact.php   Endpoint de contact → Zammad (celui qui est déployé)
 deploy/ovh/www/.htaccess         Configuration Apache (404, cache, en-têtes)
 deploy/ovh/               Modèle de configuration et procédure de déploiement
@@ -67,6 +68,28 @@ fichier à ouvrir pour faire évoluer le texte, pas les gabarits.
 
 Les URL, l'endpoint de contact et la clé publique du captcha sont dans
 [`site-config.ts`](src/app/core/site-config.ts).
+
+## Mesure d'audience
+
+La fréquentation est mesurée par le Matomo de Réserves naturelles de France
+(`https://matomo.reserves-naturelles.org`, site n° 11), piloté par
+[`core/matomo.ts`](src/app/core/matomo.ts).
+
+Le traqueur est configuré **sans cookie** (`disableCookies`) et respecte « Do
+Not Track » : le site reste ainsi exempté de bandeau de consentement, et les
+mentions légales peuvent continuer d'affirmer qu'il ne dépose rien. Côté
+instance, l'anonymisation des adresses IP doit rester active (Administration →
+Confidentialité) : c'est le seul réglage que le site ne peut pas imposer.
+
+Le site étant une application monopage, les pages vues sont signalées à la main
+à chaque navigation. Les liens à ancre du bandeau (`/#contact`…) ne comptent
+pas : seul un changement de chemin déclenche un comptage.
+
+Rien n'est chargé ni compté pendant le prérendu, ni en développement —
+`matomoUrl` y vaut `null`, ce qui désactive entièrement le traqueur. Pour
+vérifier le câblage en local, lui donner temporairement une valeur dans
+`src/environments/environment.development.ts` et lire `window._paq` dans la
+console.
 
 ## Formulaire de contact
 
@@ -84,12 +107,12 @@ invisible.
 Quatre valeurs, à déposer dans un fichier **au-dessus de la racine web** (ou en
 variables d'environnement, qui l'emportent) :
 
-| Variable | Rôle |
-|----------|------|
-| `ZAMMAD_URL` | Racine de l'instance Zammad, sans slash final |
-| `ZAMMAD_TOKEN` | Jeton d'API d'un agent dédié autorisé à créer des tickets |
-| `ZAMMAD_GROUP` | Groupe destinataire (défaut : `Users`) |
-| `TURNSTILE_SECRET` | Clé secrète Cloudflare Turnstile |
+| Variable           | Rôle                                                      |
+| ------------------ | --------------------------------------------------------- |
+| `ZAMMAD_URL`       | Racine de l'instance Zammad, sans slash final             |
+| `ZAMMAD_TOKEN`     | Jeton d'API d'un agent dédié autorisé à créer des tickets |
+| `ZAMMAD_GROUP`     | Groupe destinataire (défaut : `Users`)                    |
+| `TURNSTILE_SECRET` | Clé secrète Cloudflare Turnstile                          |
 
 Modèle et procédure : [`deploy/ovh/`](deploy/ovh/). Créer le jeton Zammad depuis
 un **agent dédié**, avec les seules permissions nécessaires sur le groupe visé :
