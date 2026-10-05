@@ -1,0 +1,154 @@
+@use 'tokens' as *;
+@use 'mixins' as *;
+
+// Bandeau d'annonce, entre l'accueil et la présentation du projet. Fond
+// bleu-vert plein : c'est le seul bloc de la page à annoncer une date, il doit
+// se détacher des sections claires qui l'encadrent.
+.release {
+  position: relative;
+  padding-block: $spacing-xxl;
+  background-color: $primary-color;
+  color: $white;
+  overflow: hidden;
+
+  &::before {
+    @include waves-pattern;
+
+    opacity: 0.2;
+  }
+
+  &__inner {
+    @include container;
+
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-xxl;
+  }
+
+  &__text {
+    flex: 1 1 320px;
+  }
+
+  &__eyebrow {
+    @include subtitle;
+
+    color: $secondary-yellow;
+  }
+
+  &__title {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+    color: $white;
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    margin: 0 0 $spacing-sm;
+    font-weight: $font-weight-bold;
+    color: $secondary-yellow;
+
+    i {
+      font-size: $font-size-h4;
+      line-height: 1;
+    }
+  }
+
+  &__text-lead {
+    margin: 0;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: rgba($white, 0.9);
+  }
+
+  // Grille de largeur fixe plutôt que quatre cases dimensionnées par leur
+  // contenu : « jour » et « secondes » n'ont pas la même longueur, et des
+  // boîtes inégales donneraient l'impression d'un alignement raté.
+  &__units {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-sm;
+    // Assez large pour que « SECONDES », le libellé le plus long une fois
+    // l'interlettrage du Kit UI appliqué, tienne sans élargir sa seule case.
+    width: 500px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-sm;
+    background-color: rgba($white, 0.12);
+    border-radius: $border-radius-md;
+  }
+
+  &__value {
+    font-size: $font-size-h1;
+    font-weight: $font-weight-bold;
+    line-height: 1.1;
+    // Chiffres de même chasse : le décompte ne sautille pas d'une seconde à
+    // l'autre.
+    font-variant-numeric: tabular-nums;
+    color: $white;
+  }
+
+  &__label {
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-subtitle;
+    color: $secondary-yellow;
+  }
+
+  &__past {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin: 0;
+    padding: $spacing-md $spacing-lg;
+    background-color: rgba($white, 0.12);
+    border-radius: $border-radius-md;
+    font-size: $font-size-h4;
+    font-weight: $font-weight-bold;
+    color: $white;
+
+    i {
+      color: $secondary-yellow;
+      line-height: 1;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-desktop) {
+  .release__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-lg;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .release {
+    &__units {
+      // Les quatre cases ne tiennent plus sur une ligne : deux par deux, en
+      // occupant toute la largeur plutôt qu'en débordant.
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    &__value {
+      font-size: $font-size-h2;
+    }
+  }
+}

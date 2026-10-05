@@ -8,6 +8,21 @@ import { VitrineDocument } from '../../shared/components/pdf-dialog/pdf-dialog';
  * Cicada.
  */
 
+/**
+ * Sortie de la version 1 et webinaire de lancement, annoncés en compte à
+ * rebours sous le bandeau d'accueil.
+ *
+ * `date` porte un décalage horaire explicite : sans lui, un visiteur situé hors
+ * de France verrait un décompte faux d'une à plusieurs heures. En décembre,
+ * Paris est à UTC+1.
+ */
+export const RELEASE_EVENT = {
+  date: '2026-12-07T14:00:00+01:00',
+  dateLabel: 'Lundi 7 décembre 2026 à 14 h',
+  title: 'Sortie de la version 1 et webinaire de lancement',
+  text: "La version 1 de Cicada sera publiée à cette date, et présentée dans la foulée lors d'un webinaire ouvert à tous les gestionnaires.",
+} as const;
+
 /** Un module de Cicada, présenté sous forme de tuile. */
 export interface ModuleCard {
   readonly icon: string;

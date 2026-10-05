@@ -6,6 +6,7 @@ import { Deployment } from './sections/deployment/deployment';
 import { Features } from './sections/features/features';
 import { Hero } from './sections/hero/hero';
 import { Project } from './sections/project/project';
+import { Release } from './sections/release/release';
 import { Resources } from './sections/resources/resources';
 
 /**
@@ -17,9 +18,10 @@ import { Resources } from './sections/resources/resources';
 @Component({
   selector: 'app-landing',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Hero, Project, Features, Deployment, Resources, Community, Contact],
+  imports: [Hero, Release, Project, Features, Deployment, Resources, Community, Contact],
   template: `
     <app-hero />
+    <app-release />
     <app-project />
     <app-features />
     <app-deployment />
