@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
  * encart clairement délimité et lisible.
  *
  * Le visuel et les textes sont repris **à l'identique** du composant
- * `app-eu-funding-notice` de l'application CICADA, lui-même aligné sur le guide
+ * `app-eu-funding-notice` de l'application Cicada, lui-même aligné sur le guide
  * « Mentions et visuels obligatoires » du LIFE. Ne rien reformuler sans l'accord
  * de la coordination communication du LIFE : une communication dépourvue de
  * cette phrase peut voir son financement refusé par l'Union européenne.

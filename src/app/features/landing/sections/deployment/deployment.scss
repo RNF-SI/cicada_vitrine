@@ -28,12 +28,14 @@
     margin-bottom: 0;
   }
 
-  // Trois colonnes explicites : en `auto-fit`, la troisième voie passait seule
-  // à la ligne. Elles s'empilent d'un coup sous le seuil « bureau », une carte
-  // de 300 px étant trop étroite pour la liste qu'elle porte.
+  // Deux colonnes, et la troisième voie en pleine largeur dessous. À trois
+  // colonnes égales, le service hébergé — six arguments et un encart tarifaire
+  // — débordait largement ses deux voisines, qui n'en portent que quatre et
+  // trois : la rangée se lisait comme un déséquilibre plutôt que comme un
+  // choix. Les cartes s'empilent d'un coup sous le seuil « bureau ».
   &__options {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: $spacing-lg;
     align-items: stretch;
 
@@ -110,9 +112,13 @@
     }
   }
 
+  // Boutons centrés : sur la carte du service hébergé, devenue pleine largeur,
+  // un bouton calé à gauche se perdait. Les trois voies partagent le même
+  // alignement pour que la rangée reste cohérente.
   &__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: $spacing-sm;
   }
 
@@ -160,7 +166,8 @@
   }
 
   // --- Option « tête de réseau » : vert pâle, la voie la plus directe pour les
-  // structures des deux réseaux, donc au centre et visuellement distincte ------
+  // structures des deux réseaux, d'où son aplat de couleur quand sa voisine se
+  // contente d'un liseré -----------------------------------------------------
   &--network {
     background-color: $secondary-pale-green;
 
@@ -184,6 +191,8 @@
 
   // --- Option hébergée : carte bleu-vert pleine, texte blanc (combinaison AA) --
   &--saas {
+    // Seule sur sa ligne, sous les deux premières voies.
+    grid-column: 1 / -1;
     position: relative;
     background-color: $primary-color;
     color: $white;
@@ -216,6 +225,14 @@
       color: $white;
     }
 
+    // Sur toute la largeur, une colonne unique de six puces laisserait la
+    // moitié droite de la carte vide : on les répartit sur deux colonnes.
+    .option__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: $spacing-xl;
+    }
+
     .option__list i {
       color: $secondary-yellow;
     }
@@ -230,6 +247,12 @@
         color: $secondary-yellow;
       }
     }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .option--saas .option__list {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -5,10 +5,10 @@ import { VitrineDocument } from '../../shared/components/pdf-dialog/pdf-dialog';
  *
  * Source : la note de présentation du projet (avril 2026), reprise dans
  * `public/documents/presentation-cicada.pdf`, et la documentation du dépôt
- * CICADA.
+ * Cicada.
  */
 
-/** Un module de CICADA, présenté sous forme de tuile. */
+/** Un module de Cicada, présenté sous forme de tuile. */
 export interface ModuleCard {
   readonly icon: string;
   readonly title: string;
@@ -34,26 +34,26 @@ export const MODULES: readonly ModuleCard[] = [
   {
     icon: 'fi-rr-file-edit',
     title: 'Mes plans de gestion',
-    text: "Tout le cycle du plan, de la saisie initiale à l'évaluation, structuré selon le CT88 : enjeux, objectifs, indicateurs et actions, plans multi-sites, versionnement et duplication pour le renouvellement. Puis le suivi annuel des actions et des indicateurs, et les graphiques de bilan de la gestion.",
+    text: "De la saisie initiale à l'évaluation, structuré selon le CT88 : enjeux, objectifs, indicateurs et actions, plans multi-sites et versionnement. Puis le suivi annuel des actions et des indicateurs, et les graphiques de bilan de la gestion.",
     accent: 'primary',
   },
   {
     icon: 'fi-rr-clipboard-list-check',
     title: 'Mes suivis et inventaires',
-    text: 'Décrire les suivis et inventaires réalisés — objectifs, protocoles, cibles. Le module ne remplace pas les outils de saisie naturaliste comme GeoNature : il centralise ce qui est suivi, comment et pourquoi. Utilisable seul, sans saisir tout un plan de gestion.',
+    text: 'Décrire les suivis et inventaires réalisés (objectifs, protocoles, cibles…). Le module ne remplace pas les outils de saisie naturaliste comme GeoNature : il centralise ce qui est suivi, comment et pourquoi. Utilisable seul, sans saisir tout un plan de gestion.',
     accent: 'pale-green',
   },
   {
     icon: 'fi-rr-document-signed',
     title: 'Zonages réglementaires',
-    text: "Saisir et visualiser la réglementation en vigueur sur l'aire protégée. Un référentiel d'activités et une matrice de correspondance structurent les dispositions par texte ; l'auto-complétion réduit fortement la saisie, et vous gardez la main pour documenter les exceptions.",
-    availability: 'Prochainement',
+    text: "Saisir et visualiser la réglementation en vigueur sur l'aire protégée.",
+    availability: '2027',
     accent: 'yellow',
   },
   {
     icon: 'fi-rr-search',
     title: 'Exploration des données',
-    text: "Consulter les plans de gestion et les zonages des autres aires protégées contributrices — protocoles de suivi, indicateurs, grilles de lecture — pour s'en inspirer. Les données de suivi de la mise en œuvre, elles, restent confidentielles.",
+    text: "Consulter les plans de gestion (protocoles de suivi, indicateurs, grilles de lecture) pour s'en inspirer. Les données de suivi de la mise en œuvre, elles, restent confidentielles.",
     accent: 'terra-cotta',
   },
 ];
@@ -69,12 +69,12 @@ export const CROSS_FEATURES: readonly CrossFeature[] = [
   {
     icon: 'fi-rr-cloud-download',
     title: 'Exports et rapportages',
-    text: "Produire le volume stratégique du plan, alimenter les rapports d'activité et les évaluations à mi-parcours et de fin de parcours, sans ressaisie.",
+    text: "Produire une première trame du volume stratégique du plan, alimenter les rapports d'activité et les évaluations à mi-parcours et de fin de parcours, sans ressaisie.",
   },
   {
     icon: 'fi-rr-dashboard',
     title: 'Tableau de bord et bilan',
-    text: "Suivre les temps humains, les moyens financiers, le calendrier et l'évolution des indicateurs d'état et de pression ; les graphiques de bilan se génèrent automatiquement.",
+    text: "Suivre les temps humains, les moyens financiers, le calendrier et l'évolution des indicateurs d'état et de pression ; les graphiques de bilan se génèrent automatiquement et s'exportent.",
   },
   {
     icon: 'fi-rr-users-alt',
@@ -91,7 +91,7 @@ export const CROSS_FEATURES: readonly CrossFeature[] = [
 /** Modules envisagés, sous réserve de financements. */
 export const ROADMAP: readonly string[] = [
   'Module « Travaux » : suivi quotidien des opérations de gestion, avec une application mobile, interfacé avec GeoNature ou Geotrek.',
-  'Module à destination des autorités de tutelle : bilans territoriaux agrégés à partir des données des plans de gestion.',
+  'Module « Vision territoriale » : bilans territoriaux agrégés à partir des données des plans de gestion.',
   'Module « Foncier » : suivi des données foncières associées aux sites gérés.',
   'Module « Infractions et incivilités » : centralisation des signalements sur les aires protégées.',
 ];
@@ -106,15 +106,11 @@ export interface DeploymentPoint {
 export const SELF_HOSTED_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-unlock',
-    text: 'Code source complet sous licence GNU GPL v3. Aucune fonctionnalité réservée.',
+    text: 'Code source complet sous licence GNU GPL v3.',
   },
   {
     icon: 'fi-rr-cube',
-    text: 'Déploiement par Docker Compose : toute la pile démarre en une commande.',
-  },
-  {
-    icon: 'fi-rr-shield-check',
-    text: 'Les données de suivi de la mise en œuvre restent confidentielles.',
+    text: 'Déploiement par Docker Compose.',
   },
   {
     icon: 'fi-rr-shuffle',
@@ -134,19 +130,15 @@ export const SELF_HOSTED_POINTS: readonly DeploymentPoint[] = [
 export const NETWORK_POINTS: readonly DeploymentPoint[] = [
   {
     icon: 'fi-rr-gift',
-    text: 'Gratuit, sans convention à négocier ni devis à demander.',
+    text: 'Gratuit.',
   },
   {
     icon: 'fi-rr-plug',
-    text: 'Rien à installer ni à maintenir : vous recevez vos accès.',
+    text: 'Rien à installer ni à maintenir.',
   },
   {
     icon: 'fi-rr-sitemap',
-    text: 'Vos sites et vos plans aux côtés de ceux de votre réseau.',
-  },
-  {
-    icon: 'fi-rr-life-ring',
-    text: 'Accompagnement par votre tête de réseau, qui connaît vos pratiques.',
+    text: "Vos sites et vos plans centralisés à l'échelle de votre réseau.",
   },
 ];
 
@@ -187,9 +179,9 @@ export const SAAS_POINTS: readonly DeploymentPoint[] = [
 export const DOCUMENTS: readonly VitrineDocument[] = [
   {
     id: 'flyer',
-    title: 'Flyer CICADA',
+    title: 'Flyer Cicada',
     description:
-      "Deux pages pour présenter l'outil en réunion ou sur un stand : pourquoi CICADA, ce qu'il apporte, et à qui il profite.",
+      "Deux pages pour présenter l'outil en réunion ou sur un stand : pourquoi Cicada, ce qu'il apporte, et à qui il profite.",
     icon: 'fi-rr-newspaper',
     file: '/documents/flyer-cicada.pdf',
     downloadName: 'flyer-cicada.pdf',

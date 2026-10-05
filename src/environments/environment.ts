@@ -21,6 +21,6 @@ export const environment = {
    */
   matomoUrl: 'https://matomo.reserves-naturelles.org' as string | null,
 
-  /** Identifiant du site « vitrine CICADA » dans cette instance. */
+  /** Identifiant du site « vitrine Cicada » dans cette instance. */
   matomoSiteId: '11',
 };

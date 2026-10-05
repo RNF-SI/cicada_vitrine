@@ -1,4 +1,4 @@
-/** Structure à l'origine ou partenaire du projet CICADA. */
+/** Structure à l'origine ou partenaire du projet Cicada. */
 export interface Partner {
   readonly name: string;
   /** Nom complet, utilisé en infobulle et comme texte alternatif. */
@@ -25,7 +25,7 @@ export interface Partner {
 }
 
 /**
- * Structures à l'origine de CICADA : les deux têtes de réseau des gestionnaires
+ * Structures à l'origine de Cicada : les deux têtes de réseau des gestionnaires
  * d'espaces naturels protégés, qui pilotent conjointement le projet.
  *
  * L'ordre est celui des documents officiels du projet (flyer et note de
@@ -72,5 +72,29 @@ export const ASSOCIATED_PARTNERS: readonly Partner[] = [
     shortName: 'PatriNat',
     url: 'https://www.patrinat.fr',
     logo: '/assets/images/partners/patrinat.png',
+  },
+];
+
+/**
+ * Financeurs, cités en pied de page sous « Avec le soutien financier de ».
+ *
+ * Le bloc marque de l'État est repris tel quel ; il n'est associé à aucun autre
+ * logo à l'intérieur d'une même image. L'OFB figure ici en tant que financeur,
+ * et plus haut en tant que partenaire : les deux qualités sont distinctes et se
+ * citent séparément.
+ */
+export const FUNDING_PARTNERS: readonly Partner[] = [
+  {
+    name: 'République française',
+    fullName: 'République française — ministère de la Transition écologique',
+    shortName: 'République française',
+    url: 'https://www.ecologie.gouv.fr',
+    logo: '/assets/images/partners/republique-francaise-logo.png',
+  },
+  {
+    name: 'OFB',
+    fullName: 'Office français de la biodiversité',
+    url: 'https://www.ofb.gouv.fr',
+    logo: '/assets/images/partners/ofb.svg',
   },
 ];

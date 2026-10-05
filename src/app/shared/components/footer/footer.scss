@@ -41,18 +41,28 @@
     filter: brightness(0) invert(1);
   }
 
-  &__tagline {
-    margin: $spacing-md 0 $spacing-sm;
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    color: rgba($white, 0.9);
-  }
-
   &__license {
-    margin: 0;
+    margin: $spacing-md 0 0;
     font-size: $font-size-small;
     line-height: $line-height-small;
     color: rgba($white, 0.75);
+  }
+
+  &__github {
+    display: inline-flex;
+    margin-top: $spacing-md;
+    padding: $spacing-xs;
+    border-radius: $border-radius-md;
+    color: rgba($white, 0.75);
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $secondary-yellow;
+    }
+  }
+
+  &__github-mark {
+    display: block;
   }
 
   &__links {

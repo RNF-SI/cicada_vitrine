@@ -1,5 +1,5 @@
 /**
- * Configuration de la vitrine CICADA.
+ * Configuration de la vitrine Cicada.
  *
  * Tout ce qui est susceptible de changer au déploiement est regroupé ici afin
  * qu'aucune URL ni aucun libellé ne soit enfoui dans un template.
@@ -11,8 +11,13 @@
 import { environment } from '../../environments/environment';
 
 export const SITE_CONFIG = {
-  /** Version de CICADA mise en avant sur la vitrine. */
-  appVersion: '0.1.49',
+  /**
+   * Instances ouvertes par les deux têtes de réseau, proposées en option 2 du
+   * déploiement. Elles sont exploitées par RNF et la FCEN, pas par la vitrine :
+   * leurs adresses changent indépendamment de celle-ci.
+   */
+  rnfInstanceUrl: 'https://cicada.reserves-naturelles.org',
+  fcenInstanceUrl: 'https://cicada.reseau-cen.org/accueil',
 
   /** Dépôt public (licence GNU GPL v3). */
   repositoryUrl: 'https://github.com/RNF-SI/Cicada',

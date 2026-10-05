@@ -234,7 +234,7 @@ $lines = array_filter([
     '',
     $message,
     '',
-    '— Envoyé depuis le formulaire de contact du site de présentation de CICADA.',
+    '— Envoyé depuis le formulaire de contact du site de présentation de Cicada.',
 ], static fn (?string $line): bool => $line !== null);
 
 [$status, $body] = http_post(

@@ -1,9 +1,9 @@
 // =============================================================================
-// Styles globaux — vitrine CICADA
+// Styles globaux — vitrine Cicada
 // =============================================================================
 // La vitrine n'embarque pas Angular Material (inutile pour une page de contenu) :
 // les composants sont écrits à la main, mais strictement sur les tokens du Kit UI
-// Biodiv' repris de l'application CICADA (cf. `assets/scss/_tokens.scss`).
+// Biodiv' repris de l'application Cicada (cf. `assets/scss/_tokens.scss`).
 // Police Nunito et icônes Uicons chargées dans `index.html`, comme dans l'app.
 
 @use 'tokens' as *;

@@ -8,7 +8,7 @@ import {
 import { SITE_CONFIG } from '../../../../core/site-config';
 
 /**
- * Section « Le projet » : à quoi répond CICADA, qui le porte, qui le finance.
+ * Section « Le projet » : à quoi répond Cicada, qui le porte, qui le finance.
  *
  * La citation des deux têtes de réseau à l'origine du projet et celle du
  * financement européen ne sont pas décoratives : ce sont des engagements.

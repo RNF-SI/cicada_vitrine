@@ -12,7 +12,7 @@ export interface NavSection {
 export const NAV_SECTIONS: readonly NavSection[] = [
   { id: 'projet', label: 'Le projet' },
   { id: 'fonctionnalites', label: 'Fonctionnalités' },
-  { id: 'deploiement', label: 'Déployer CICADA' },
+  { id: 'deploiement', label: 'Déployer Cicada' },
   { id: 'ressources', label: 'Ressources' },
   { id: 'communaute', label: 'Communauté' },
   { id: 'contact', label: 'Contact' },

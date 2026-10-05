@@ -1,6 +1,6 @@
-# Site vitrine de CICADA
+# Site vitrine de Cicada
 
-Page unique de présentation de [CICADA](https://github.com/RNF-SI/Cicada), l'outil
+Page unique de présentation de [Cicada](https://github.com/RNF-SI/Cicada), l'outil
 de gestion des plans de gestion des aires protégées porté par la Fédération des
 Conservatoires d'espaces naturels et Réserves naturelles de France.
 
@@ -31,11 +31,11 @@ de la fonction serverless : voir « Formulaire de contact » plus bas.
 
 ## Design
 
-Le design suit **strictement** le Kit UI Biodiv' de l'application CICADA :
+Le design suit **strictement** le Kit UI Biodiv' de l'application Cicada :
 couleurs, typographie Nunito, espacements, rayons, ombres et motifs décoratifs
 sont repris du dépôt. Les valeurs vivent dans
 [`src/assets/scss/_tokens.scss`](src/assets/scss/_tokens.scss), qui cite sa
-source — la charte fait foi dans le dépôt CICADA, pas ici.
+source — la charte fait foi dans le dépôt Cicada, pas ici.
 
 La vitrine n'embarque pas Angular Material : les composants sont écrits à la
 main sur ces mêmes tokens, ce qui évite de traîner la bibliothèque et ses 41 ko
@@ -172,5 +172,5 @@ script PHP pour Cloudflare Pages.
 
 ## Licence
 
-Le code de cette vitrine suit la licence de CICADA : **GNU GPL v3**. Les logos et
+Le code de cette vitrine suit la licence de Cicada : **GNU GPL v3**. Les logos et
 le bloc marque européen restent la propriété de leurs titulaires.

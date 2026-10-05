@@ -164,7 +164,7 @@ export const onRequest = async (context: { request: Request; env: Env }): Promis
     '',
     message,
     '',
-    '— Envoyé depuis le formulaire de contact du site de présentation de CICADA.',
+    '— Envoyé depuis le formulaire de contact du site de présentation de Cicada.',
   ].filter((line): line is string => line !== null);
 
   try {

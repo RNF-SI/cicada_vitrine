@@ -11,6 +11,7 @@ change, c'est le seul endroit à mettre à jour.
 | `ofb.svg` | Office français de la biodiversité | SVG |
 | `lpo.png` | Ligue pour la protection des oiseaux | PNG transparent |
 | `patrinat.png` | PatriNat | PNG transparent |
+| `republique-francaise-logo.png` | République française (bloc marque de l'État) | PNG transparent |
 
 ## Contraintes d'affichage
 
@@ -37,7 +38,18 @@ seul endroit où un fond est ajouté.
 Un logo absent n'est pas un problème : le composant affiche alors le nom de la
 structure en toutes lettres dans une pastille, jamais une image cassée.
 
-## Bloc marque européen
+## Blocs marque institutionnels
+
+### Bloc marque de l'État
+
+`republique-francaise-logo.png` est le bloc marque de la République française
+(Marianne, nom de l'État et devise). Il se reprend **tel quel** : ni recadré, ni
+dissocié de sa devise, ni fondu dans une image avec un autre logo. Il est en
+revanche normal de le poser à côté d'un autre logo, ce que fait le pied de page
+sous le libellé « Avec le soutien financier de » (`FUNDING_PARTNERS`), où il
+passe par le composant comme les autres.
+
+### Bloc marque européen
 
 Le bloc « UE + LIFE BIODIV'FRANCE » ne se dépose pas ici : il est déjà présent
 (`../bloc-marque-ue-life-biodiv.jpg`) et ne doit **pas** être recomposé,

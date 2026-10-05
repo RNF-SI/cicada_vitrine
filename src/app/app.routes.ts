@@ -9,12 +9,12 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/landing/landing').then((m) => m.Landing),
-    title: "CICADA — L'outil de gestion des plans de gestion des aires protégées",
+    title: "Cicada — L'outil de gestion des plans de gestion des aires protégées",
   },
   {
     path: 'mentions-legales',
     loadComponent: () => import('./features/legal/legal').then((m) => m.Legal),
-    title: 'Mentions légales — CICADA',
+    title: 'Mentions légales — Cicada',
   },
   { path: '**', redirectTo: '' },
 ];

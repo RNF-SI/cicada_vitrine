@@ -93,12 +93,6 @@
     color: $secondary-terra-cotta;
   }
 
-  &__story-note {
-    font-size: $font-size-small;
-    line-height: $line-height-small;
-    color: $gray-dark;
-  }
-
   &__origin {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

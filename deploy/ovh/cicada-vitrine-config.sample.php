@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Configuration du formulaire de contact de la vitrine CICADA — MODÈLE.
+ * Configuration du formulaire de contact de la vitrine Cicada — MODÈLE.
  * =============================================================================
  *
  * MODE D'EMPLOI

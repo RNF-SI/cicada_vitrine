@@ -14,7 +14,7 @@ import { NAV_SECTIONS } from './nav-section';
 /**
  * Bandeau de navigation de la page unique.
  *
- * Reprend le bandeau de l'application CICADA : fond blanc, 58 px, collant, logo
+ * Reprend le bandeau de l'application Cicada : fond blanc, 58 px, collant, logo
  * à gauche, liens en Nunito bold bleu-vert, et menu latéral bleu primaire avec
  * barre active jaune sur mobile.
  *

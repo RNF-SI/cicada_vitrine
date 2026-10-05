@@ -2,7 +2,7 @@
 @use 'mixins' as *;
 
 // Bandeau : reprend la hauteur (58px), le fond blanc et le logo 48px de
-// l'application CICADA (cf. header.component.scss du dépôt Cicada).
+// l'application Cicada (cf. header.component.scss du dépôt Cicada).
 .header {
   position: sticky;
   top: 0;
