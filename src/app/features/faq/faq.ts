@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, afterNextRender } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { FAQ_TOPICS } from './faq-content';
+import { FAQ_TOPICS, isFaqList } from './faq-content';
 
 /**
  * Questions fréquentes.
@@ -24,6 +24,7 @@ import { FAQ_TOPICS } from './faq-content';
 })
 export class Faq {
   protected readonly topics = FAQ_TOPICS;
+  protected readonly isList = isFaqList;
 
   constructor() {
     // Même raison que dans `Landing` : la page est chargée en différé, et le

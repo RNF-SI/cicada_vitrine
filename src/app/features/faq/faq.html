@@ -9,9 +9,9 @@
 
     <h1 class="faq__title">Questions fréquentes</h1>
     <p class="faq__lead">
-      Ce que les gestionnaires nous demandent le plus souvent à propos de Cicada : ce que fait
-      l'outil, où saisir ses données, ce qu'il advient de celles-ci. Si votre question n'y figure
-      pas, <a routerLink="/" fragment="contact">écrivez-nous</a>.
+      Ce que les gestionnaires et partenaires nous demandent le plus souvent à propos de Cicada : ce
+      que fait l'outil, où saisir ses données, ce qu'il advient de celles-ci. Si votre question n'y
+      figure pas, <a routerLink="/" fragment="contact">écrivez-nous</a>.
     </p>
 
     <!-- Sommaire : la page est volontairement dépliée, il compense sa longueur. -->
@@ -40,8 +40,19 @@
         @for (entry of topic.entries; track entry.id) {
           <div class="faq__entry">
             <h3 [id]="entry.id" class="faq__question">{{ entry.question }}</h3>
-            @for (paragraph of entry.answer; track paragraph) {
-              <p class="faq__answer">{{ paragraph }}</p>
+            @for (block of entry.answer; track $index) {
+              @if (isList(block)) {
+                @if (block.intro) {
+                  <p class="faq__answer faq__answer--intro">{{ block.intro }}</p>
+                }
+                <ul class="faq__list">
+                  @for (item of block.items; track $index) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              } @else {
+                <p class="faq__answer">{{ block }}</p>
+              }
             }
             @if (entry.link; as link) {
               <p class="faq__link">
@@ -75,7 +86,7 @@
         </p>
         <a class="btn btn--primary" routerLink="/" fragment="contact">
           <i class="fi fi-rr-paper-plane" aria-hidden="true"></i>
-          Nous écrire
+          Nous contacter
         </a>
       </div>
     </aside>

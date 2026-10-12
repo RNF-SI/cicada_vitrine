@@ -97,7 +97,25 @@
     margin-bottom: $spacing-sm;
     color: $black;
 
-    &:last-of-type {
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--intro {
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  &__list {
+    margin: 0 0 $spacing-sm;
+    padding-left: $spacing-lg;
+    color: $black;
+
+    li + li {
+      margin-top: $spacing-xs;
+    }
+
+    &:last-child {
       margin-bottom: 0;
     }
   }

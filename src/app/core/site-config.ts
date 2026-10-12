@@ -41,6 +41,9 @@ export const SITE_CONFIG = {
   installGuideUrl: 'https://github.com/RNF-SI/Cicada/blob/main/docs/INSTALLATION_GUIDE.md',
   publicApiDocUrl: 'https://github.com/RNF-SI/Cicada/blob/main/docs/API_PUBLIQUE_PLANS.md',
 
+  /** Guide d'élaboration des plans de gestion (Cahier technique n°88), en ligne. */
+  ct88GuideUrl: 'https://ct88.espaces-naturels.fr/',
+
   /**
    * Endpoint qui crée le ticket Zammad (`deploy/ovh/www/api/contact.php`, copié
    * à la racine du build par `npm run build`). L'adresse de support et le jeton Zammad ne sont connus que de
