@@ -219,6 +219,15 @@ export const FAQ_TOPICS: readonly FaqTopic[] = [
         ],
       },
       {
+        id: 'intelligence-artificielle',
+        question: "Cicada est-il développé avec l'intelligence artificielle ?",
+        answer: [
+          "Oui, en partie. Cicada, comme ce site, est développé avec l'aide de l'intelligence artificielle (Claude AI, d'Anthropic), sous la supervision et la validation de l'équipe de développement.",
+          "Concrètement, l'IA assiste les développeurs dans l'écriture du code, des tests et de la documentation. Chaque contribution est relue, testée et validée par un développeur avant d'être intégrée : l'équipe reste responsable de ce qui est publié, et les choix fonctionnels et méthodologiques restent ceux de RNF, de la FCEN et des gestionnaires associés au projet.",
+          "Aucune donnée saisie dans Cicada par les gestionnaires n'est transmise à un service d'intelligence artificielle.",
+        ],
+      },
+      {
         id: 'qui-finance',
         question: 'Qui finance Cicada ?',
         answer: [
