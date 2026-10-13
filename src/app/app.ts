@@ -42,6 +42,11 @@ export class App {
     // navigations au sein de l'accueil. L'arrivée sur une ancre depuis une
     // autre page, elle, est prise en charge par le composant `Landing`, qui
     // sait quand ses sections sont rendues.
+    //
+    // Sans fragment, la navigation remet la page en haut : sans cela, ouvrir
+    // la FAQ ou les mentions légales depuis le pied de page laisse le visiteur
+    // tout en bas de la nouvelle page. La navigation initiale est exclue pour
+    // laisser le navigateur restaurer la position lors d'un rechargement.
     afterNextRender(() => {
       // Mesure d'audience : uniquement dans le navigateur, et après le premier
       // rendu — le prérendu statique ne doit compter aucune visite.
@@ -49,10 +54,12 @@ export class App {
 
       const subscription = router.events
         .pipe(filter((event) => event instanceof NavigationEnd))
-        .subscribe(() => {
+        .subscribe((event) => {
           const fragment = router.parseUrl(router.url).fragment;
           if (fragment) {
             document.getElementById(fragment)?.scrollIntoView({ behavior: 'instant' });
+          } else if (event.id !== 1) {
+            window.scrollTo({ top: 0, behavior: 'instant' });
           }
         });
 
