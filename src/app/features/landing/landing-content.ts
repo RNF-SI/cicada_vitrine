@@ -23,6 +23,8 @@ export const RELEASE_EVENT = {
   text: "La version 1 de Cicada sera publiée à cette date, et présentée dans la foulée lors d'un webinaire ouvert à tous les gestionnaires.",
 } as const;
 
+  /** Salle Zoom du webinaire, reprise dans l'invitation d'agenda et le bouton d'accès. */
+  zoomUrl: 'https://us02web.zoom.us/j/86921899639?pwd=F0Tp6FPEvtZ44y71Xr20PfYauIY9Vx.1',
 /** Un module de Cicada, présenté sous forme de tuile. */
 export interface ModuleCard {
   readonly icon: string;
@@ -43,7 +45,7 @@ export const MODULES: readonly ModuleCard[] = [
   {
     icon: 'fi-rr-map-marker',
     title: 'Mes sites',
-    text: "Gérer les sites auxquels vous êtes rattaché et les droits associés, co-gestion comprise. Les têtes de réseau fournissent un référentiel de sites ; vous pouvez en ajouter en important un fichier géométrique ou en dessinant directement l'emprise.",
+    text: "Gérer les sites auxquels vous êtes rattaché et les droits associés, co-gestion comprise. Les têtes de réseau fournissent un référentiel de sites ; vous pouvez en ajouter en important un fichier géométrique ou en dessinant directement l'emprise spatiale.",
     accent: 'salmon',
   },
   {
