@@ -19,12 +19,14 @@ import { VitrineDocument } from '../../shared/components/pdf-dialog/pdf-dialog';
 export const RELEASE_EVENT = {
   date: '2026-12-07T14:00:00+01:00',
   dateLabel: 'Lundi 7 décembre 2026 à 14 h',
+  /** Durée du webinaire, en heures : fixe la fin de l'événement dans l'agenda et la fenêtre d'accès à la visio. */
+  durationHours: 1.5,
   title: 'Sortie de la version 1 et webinaire de lancement',
   text: "La version 1 de Cicada sera publiée à cette date, et présentée dans la foulée lors d'un webinaire ouvert à tous les gestionnaires.",
-} as const;
-
   /** Salle Zoom du webinaire, reprise dans l'invitation d'agenda et le bouton d'accès. */
   zoomUrl: 'https://us02web.zoom.us/j/86921899639?pwd=F0Tp6FPEvtZ44y71Xr20PfYauIY9Vx.1',
+} as const;
+
 /** Un module de Cicada, présenté sous forme de tuile. */
 export interface ModuleCard {
   readonly icon: string;

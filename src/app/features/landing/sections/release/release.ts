@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import { RELEASE_EVENT } from '../../landing-content';
+import { buildIcs, googleCalendarUrl, outlookCalendarUrl, toDataUrl } from './calendar-event';
 
 /** Temps restant avant l'échéance, déjà découpé pour l'affichage. */
 interface Remaining {
@@ -17,6 +18,12 @@ interface Remaining {
   readonly minutes: number;
   readonly seconds: number;
 }
+
+/** Où l'on en est par rapport au webinaire : avant, pendant, ou après. */
+type Phase = 'before' | 'live' | 'after';
+
+const EVENT_START = new Date(RELEASE_EVENT.date).getTime();
+const EVENT_END = EVENT_START + RELEASE_EVENT.durationHours * 3_600_000;
 
 /**
  * Compte à rebours jusqu'à la sortie de la version 1 et au webinaire de
@@ -30,6 +37,11 @@ interface Remaining {
  * Les chiffres qui défilent sont masqués aux lecteurs d'écran : un compteur
  * annoncé à chaque seconde rendrait la page inutilisable. La date complète est
  * donnée juste à côté, en toutes lettres, et c'est elle qui porte l'information.
+ *
+ * Le bouton d'accès à la visio n'est actif que pendant le webinaire : un lien
+ * cliquable des semaines avant mènerait à une salle vide et ferait douter de
+ * la date. Hors créneau, il reste visible mais désactivé, avec le créneau en
+ * clair.
  */
 @Component({
   selector: 'app-release',
@@ -39,6 +51,33 @@ interface Remaining {
 })
 export class Release {
   protected readonly event = RELEASE_EVENT;
+
+  /**
+   * Liens d'ajout à l'agenda, calculés une fois : la date ne change pas en
+   * cours de visite. Les services web viennent en premier car ils marchent
+   * partout ; le fichier `.ics` suppose une application d'agenda installée,
+   * ce qui n'est pas acquis sur tous les postes.
+   */
+  protected readonly calendar = (() => {
+    const event = {
+      uid: 'lancement-v1@cicada-vitrine',
+      start: new Date(EVENT_START),
+      end: new Date(EVENT_END),
+      title: `Cicada — ${RELEASE_EVENT.title}`,
+      description: `${RELEASE_EVENT.text}\n\nRejoindre la visio : ${RELEASE_EVENT.zoomUrl}`,
+      url: RELEASE_EVENT.zoomUrl,
+    };
+    return {
+      google: googleCalendarUrl(event),
+      outlookOffice: outlookCalendarUrl(event, 'office'),
+      outlookLive: outlookCalendarUrl(event, 'live'),
+      ics: toDataUrl(buildIcs(event)),
+    };
+  })();
+  protected readonly calendarFileName = 'cicada-lancement-v1.ics';
+
+  private readonly phase = signal<Phase>(this.computePhase());
+  protected readonly isLive = computed(() => this.phase() === 'live');
 
   /** `null` une fois l'échéance passée : le bloc bascule alors sur un message. */
   private readonly remaining = signal<Remaining | null>(this.computeRemaining());
@@ -61,7 +100,10 @@ export class Release {
     const destroyRef = inject(DestroyRef);
 
     afterNextRender(() => {
-      const tick = () => this.remaining.set(this.computeRemaining());
+      const tick = () => {
+        this.remaining.set(this.computeRemaining());
+        this.phase.set(this.computePhase());
+      };
 
       tick();
       const timer = window.setInterval(tick, 1000);
@@ -69,8 +111,16 @@ export class Release {
     });
   }
 
+  private computePhase(): Phase {
+    const now = Date.now();
+    if (now < EVENT_START) {
+      return 'before';
+    }
+    return now < EVENT_END ? 'live' : 'after';
+  }
+
   private computeRemaining(): Remaining | null {
-    const milliseconds = new Date(RELEASE_EVENT.date).getTime() - Date.now();
+    const milliseconds = EVENT_START - Date.now();
     if (milliseconds <= 0) {
       return null;
     }
