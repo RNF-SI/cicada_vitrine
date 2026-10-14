@@ -1,0 +1,46 @@
+@use 'tokens' as *;
+
+// Le menu se déplie dans le flux, sous le bouton : il s'affiche dans la
+// modale d'inscription, où un panneau flottant risquerait d'être rogné.
+.calendar-menu {
+  display: inline-block;
+
+  summary {
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  &[open] .calendar-menu__caret {
+    transform: rotate(180deg);
+  }
+
+  &__caret {
+    transition: transform $transition-fast;
+  }
+
+  &__list {
+    margin: $spacing-xs 0 0;
+    padding: $spacing-xs 0;
+    list-style: none;
+    text-align: left;
+    background-color: $white;
+    border: $border-width solid $gray-light;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-medium;
+
+    a {
+      display: block;
+      padding: $spacing-xs $spacing-md;
+      color: $primary-color;
+      font-weight: $font-weight-bold;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $secondary-pale-green;
+      }
+    }
+  }
+}

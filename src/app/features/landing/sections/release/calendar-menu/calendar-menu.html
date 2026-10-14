@@ -1,0 +1,27 @@
+<!-- `details` plutôt qu'un menu scripté : ouverture, fermeture et clavier
+     sont gérés par le navigateur, sans état à maintenir. -->
+<details class="calendar-menu">
+  <summary class="btn btn--primary">
+    <i class="fi fi-rr-calendar-plus" aria-hidden="true"></i>
+    Ajouter à mon agenda
+    <i class="fi fi-rr-angle-small-down calendar-menu__caret" aria-hidden="true"></i>
+  </summary>
+  <ul class="calendar-menu__list">
+    <li>
+      <a [href]="links.google" target="_blank" rel="noopener">Google Agenda</a>
+    </li>
+    <li>
+      <a [href]="links.outlookOffice" target="_blank" rel="noopener">
+        Outlook (compte professionnel)
+      </a>
+    </li>
+    <li>
+      <a [href]="links.outlookLive" target="_blank" rel="noopener">Outlook.com</a>
+    </li>
+    <li>
+      <a [href]="links.ics" [attr.download]="fileName">
+        Fichier .ics (Apple Calendar, Thunderbird…)
+      </a>
+    </li>
+  </ul>
+</details>

@@ -8,56 +8,19 @@
         {{ event.dateLabel }}
       </p>
       <p class="release__text-lead">{{ event.text }}</p>
+      <p class="release__text-note">
+        <em>{{ event.note }}</em>
+      </p>
 
       <div class="release__actions">
-        <!-- `details` plutôt qu'un menu scripté : ouverture, fermeture et
-             clavier sont gérés par le navigateur, sans état à maintenir. -->
-        <details class="release__menu">
-          <summary class="btn btn--on-dark">
-            <i class="fi fi-rr-calendar-plus" aria-hidden="true"></i>
-            Ajouter à mon agenda
-            <i class="fi fi-rr-angle-small-down release__menu-caret" aria-hidden="true"></i>
-          </summary>
-          <ul class="release__menu-list">
-            <li>
-              <a [href]="calendar.google" target="_blank" rel="noopener">Google Agenda</a>
-            </li>
-            <li>
-              <a [href]="calendar.outlookOffice" target="_blank" rel="noopener">
-                Outlook (compte professionnel)
-              </a>
-            </li>
-            <li>
-              <a [href]="calendar.outlookLive" target="_blank" rel="noopener">Outlook.com</a>
-            </li>
-            <li>
-              <a [href]="calendar.ics" [attr.download]="calendarFileName">
-                Fichier .ics (Apple Calendar, Thunderbird…)
-              </a>
-            </li>
-          </ul>
-        </details>
-
-        <!-- Actif pendant le webinaire seulement : hors créneau, le lien devient
-             un bouton inerte, et le créneau d'ouverture est donné en clair. -->
-        @if (isLive()) {
-          <a class="btn btn--ghost-on-dark" [href]="event.zoomUrl" target="_blank" rel="noopener">
-            <i class="fi fi-rr-video-camera" aria-hidden="true"></i>
-            Accéder au webinaire
-          </a>
-        } @else {
-          <button
-            type="button"
-            class="btn btn--ghost-on-dark"
-            disabled
-            aria-describedby="sortie-visio-hint"
-          >
-            <i class="fi fi-rr-video-camera" aria-hidden="true"></i>
-            Accéder au webinaire
+        @if (event.registration) {
+          <button type="button" class="btn btn--on-dark" (click)="signup().open()">
+            <i class="fi fi-rr-user-add" aria-hidden="true"></i>
+            S'inscrire au webinaire
           </button>
-          <p id="sortie-visio-hint" class="release__hint">
-            Accès ouvert le jour du webinaire, de 14 h à 15 h 30.
-          </p>
+        } @else {
+          <!-- Inscriptions closes : l'agenda reste proposé directement. -->
+          <app-calendar-menu />
         }
       </div>
     </div>
@@ -85,4 +48,8 @@
       </p>
     }
   </div>
+
+  @if (event.registration) {
+    <app-webinar-signup />
+  }
 </section>

@@ -6,10 +6,12 @@ import {
   computed,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { RELEASE_EVENT } from '../../landing-content';
-import { buildIcs, googleCalendarUrl, outlookCalendarUrl, toDataUrl } from './calendar-event';
+import { CalendarMenu } from './calendar-menu/calendar-menu';
+import { WebinarSignup } from './webinar-signup/webinar-signup';
 
 /** Temps restant avant l'échéance, déjà découpé pour l'affichage. */
 interface Remaining {
@@ -38,43 +40,21 @@ const EVENT_END = EVENT_START + RELEASE_EVENT.durationHours * 3_600_000;
  * annoncé à chaque seconde rendrait la page inutilisable. La date complète est
  * donnée juste à côté, en toutes lettres, et c'est elle qui porte l'information.
  *
- * Le bouton d'accès à la visio n'est actif que pendant le webinaire : un lien
- * cliquable des semaines avant mènerait à une salle vide et ferait douter de
- * la date. Hors créneau, il reste visible mais désactivé, avec le créneau en
- * clair.
+ * Pendant le webinaire, le bloc de droite signale qu'il est en cours plutôt
+ * que d'annoncer seulement la sortie.
  */
 @Component({
   selector: 'app-release',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CalendarMenu, WebinarSignup],
   templateUrl: './release.html',
   styleUrl: './release.scss',
 })
 export class Release {
   protected readonly event = RELEASE_EVENT;
 
-  /**
-   * Liens d'ajout à l'agenda, calculés une fois : la date ne change pas en
-   * cours de visite. Les services web viennent en premier car ils marchent
-   * partout ; le fichier `.ics` suppose une application d'agenda installée,
-   * ce qui n'est pas acquis sur tous les postes.
-   */
-  protected readonly calendar = (() => {
-    const event = {
-      uid: 'lancement-v1@cicada-vitrine',
-      start: new Date(EVENT_START),
-      end: new Date(EVENT_END),
-      title: `Cicada — ${RELEASE_EVENT.title}`,
-      description: `${RELEASE_EVENT.text}\n\nRejoindre la visio : ${RELEASE_EVENT.zoomUrl}`,
-      url: RELEASE_EVENT.zoomUrl,
-    };
-    return {
-      google: googleCalendarUrl(event),
-      outlookOffice: outlookCalendarUrl(event, 'office'),
-      outlookLive: outlookCalendarUrl(event, 'live'),
-      ics: toDataUrl(buildIcs(event)),
-    };
-  })();
-  protected readonly calendarFileName = 'cicada-lancement-v1.ics';
+  /** Modale d'inscription, absente quand les inscriptions sont closes. */
+  protected readonly signup = viewChild.required(WebinarSignup);
 
   private readonly phase = signal<Phase>(this.computePhase());
   protected readonly isLive = computed(() => this.phase() === 'live');

@@ -1,0 +1,117 @@
+@use 'tokens' as *;
+
+// Modale d'inscription : même habillage que l'aperçu des PDF, en plus étroit.
+// Les champs eux-mêmes viennent des styles globaux `.form`.
+.signup {
+  width: min(640px, 94vw);
+  max-width: none;
+  max-height: 92vh;
+  padding: 0;
+  border: none;
+  border-radius: $border-radius-xl;
+  box-shadow: $shadow-heavy;
+  background-color: $white;
+  color: $black;
+
+  &::backdrop {
+    background-color: rgba($black, 0.55);
+    backdrop-filter: blur(2px);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-lg $spacing-md;
+    border-bottom: $border-width solid $gray-light;
+  }
+
+  &__eyebrow {
+    margin: 0 0 $spacing-xxs;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-subtitle;
+    color: $gray-dark;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+    color: $primary-color;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: $border-radius-round;
+    color: $primary-color;
+    font-size: $font-size-h4;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background-color: $primary-bg-subtle;
+    }
+  }
+
+  &__body {
+    padding: $spacing-lg;
+  }
+
+  &__lead {
+    margin: 0 0 $spacing-md;
+    color: $gray-dark;
+  }
+
+  &__success {
+    text-align: center;
+
+    p {
+      margin: 0 0 $spacing-lg;
+    }
+  }
+
+  &__success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: $spacing-md;
+    background-color: $success-color;
+    border-radius: $border-radius-round;
+    color: $white;
+    font-size: $font-size-h3;
+  }
+
+  &__success-title {
+    margin: 0 0 $spacing-sm;
+    font-size: $font-size-h3;
+    line-height: $line-height-h3;
+    color: $primary-color;
+  }
+
+  &__success-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: $spacing-sm;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .signup__body {
+    padding: $spacing-md;
+  }
+}

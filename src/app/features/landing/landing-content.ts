@@ -18,13 +18,37 @@ import { VitrineDocument } from '../../shared/components/pdf-dialog/pdf-dialog';
  */
 export const RELEASE_EVENT = {
   date: '2026-12-07T14:00:00+01:00',
-  dateLabel: 'Lundi 7 décembre 2026 à 14 h',
+  dateLabel: 'Lundi 7 décembre 2026 de 14 h à 15h30',
   /** Durée du webinaire, en heures : fixe la fin de l'événement dans l'agenda et la fenêtre d'accès à la visio. */
   durationHours: 1.5,
   title: 'Sortie de la version 1 et webinaire de lancement',
-  text: "La version 1 de Cicada sera publiée à cette date, et présentée dans la foulée lors d'un webinaire ouvert à tous les gestionnaires.",
-  /** Salle Zoom du webinaire, reprise dans l'invitation d'agenda et le bouton d'accès. */
-  zoomUrl: 'https://us02web.zoom.us/j/86921899639?pwd=F0Tp6FPEvtZ44y71Xr20PfYauIY9Vx.1',
+  text: "La version 1 de Cicada sera publiée à cette date, et présentée lors d'un webinaire ouvert à tous les gestionnaires.",
+  /** Mention affichée à part, en italique, sous le texte de présentation. */
+  note: 'Les inscriptions sont obligatoires.',
+  /**
+   * Inscription au webinaire. Le nombre de places est limité, le lien de
+   * visio n'est donc pas publié : il est envoyé aux inscrits.
+   *
+   * Les réponses vont dans une table de l'instance Grist de la DINUM, par le
+   * point d'envoi public qu'ouvre un formulaire Grist publié. Ce formulaire
+   * doit donc rester publié tant que les inscriptions sont ouvertes, même si
+   * c'est le formulaire de la vitrine que voient les visiteurs. `shareKey` et
+   * `tableId` se lisent dans l'adresse du formulaire Grist et dans son code
+   * d'intégration ; `formUrl` sert de repli si l'envoi échoue, et figure dans
+   * l'invitation d'agenda. Mettre `registration` à `null` pour clore les
+   * inscriptions.
+   */
+  registration: {
+    gristBaseUrl: 'https://grist.numerique.gouv.fr',
+    shareKey: 'b7Tjan5MVMiiA35PW5qTbr',
+    tableId: 'Table1',
+    formUrl: 'https://grist.numerique.gouv.fr/o/docs/forms/b7Tjan5MVMiiA35PW5qTbr/4',
+  } as {
+    readonly gristBaseUrl: string;
+    readonly shareKey: string;
+    readonly tableId: string;
+    readonly formUrl: string;
+  } | null,
 } as const;
 
 /** Un module de Cicada, présenté sous forme de tuile. */

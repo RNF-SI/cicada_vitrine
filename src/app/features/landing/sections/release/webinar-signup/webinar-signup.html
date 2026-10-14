@@ -1,0 +1,186 @@
+<dialog #dialog class="signup" aria-labelledby="signup-title" (click)="onBackdropClick($event)">
+  <div class="signup__panel">
+    <header class="signup__header">
+      <div>
+        <p class="signup__eyebrow">Webinaire de lancement</p>
+        <h2 id="signup-title" class="signup__title">Inscription au webinaire</h2>
+      </div>
+      <button type="button" class="signup__close" aria-label="Fermer" (click)="close()">
+        <i class="fi fi-rr-cross" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <div class="signup__body">
+      @if (status() === 'sent') {
+        <div class="signup__success" role="status">
+          <span class="signup__success-icon" aria-hidden="true">
+            <i class="fi fi-rr-check"></i>
+          </span>
+          <h3 class="signup__success-title">Inscription enregistrée</h3>
+          <p>
+            Nous vous remercions pour votre inscription. Vous recevrez le lien de connexion au
+            webinaire à l'adresse indiquée, quelques jours avant l'événement.
+          </p>
+          <div class="signup__success-actions">
+            <app-calendar-menu />
+            <button type="button" class="btn btn--secondary" (click)="close()">Fermer</button>
+          </div>
+        </div>
+      } @else {
+        <p class="signup__lead">
+          Le nombre de places est limité : le lien de connexion est envoyé aux inscrits quelques
+          jours avant le webinaire.
+        </p>
+        <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="signup-last-name">
+                Nom <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="signup-last-name"
+                class="form__input"
+                type="text"
+                autocomplete="family-name"
+                formControlName="lastName"
+                [attr.aria-invalid]="invalid(form.controls.lastName)"
+                [attr.aria-describedby]="
+                  invalid(form.controls.lastName) ? 'signup-last-name-error' : null
+                "
+              />
+              @if (invalid(form.controls.lastName)) {
+                <p id="signup-last-name-error" class="form__error">Merci d'indiquer votre nom.</p>
+              }
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="signup-first-name">
+                Prénom <span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="signup-first-name"
+                class="form__input"
+                type="text"
+                autocomplete="given-name"
+                formControlName="firstName"
+                [attr.aria-invalid]="invalid(form.controls.firstName)"
+                [attr.aria-describedby]="
+                  invalid(form.controls.firstName) ? 'signup-first-name-error' : null
+                "
+              />
+              @if (invalid(form.controls.firstName)) {
+                <p id="signup-first-name-error" class="form__error">
+                  Merci d'indiquer votre prénom.
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="signup-organisation">
+              Organisme <span aria-hidden="true">*</span>
+            </label>
+            <input
+              id="signup-organisation"
+              class="form__input"
+              type="text"
+              autocomplete="organization"
+              formControlName="organisation"
+              [attr.aria-invalid]="invalid(form.controls.organisation)"
+              [attr.aria-describedby]="
+                invalid(form.controls.organisation) ? 'signup-organisation-error' : null
+              "
+            />
+            @if (invalid(form.controls.organisation)) {
+              <p id="signup-organisation-error" class="form__error">
+                Merci d'indiquer votre organisme.
+              </p>
+            }
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="signup-email">
+              Adresse électronique <span aria-hidden="true">*</span>
+            </label>
+            <input
+              id="signup-email"
+              class="form__input"
+              type="email"
+              autocomplete="email"
+              formControlName="email"
+              [attr.aria-invalid]="invalid(form.controls.email)"
+              [attr.aria-describedby]="invalid(form.controls.email) ? 'signup-email-error' : null"
+            />
+            @if (invalid(form.controls.email)) {
+              <p id="signup-email-error" class="form__error">
+                Merci d'indiquer une adresse électronique valide : c'est là que le lien de connexion
+                sera envoyé.
+              </p>
+            }
+          </div>
+
+          <!-- Champ piège anti-robot : invisible et ignoré des lecteurs d'écran. -->
+          <div class="form__honeypot" aria-hidden="true">
+            <label for="signup-website">Site web</label>
+            <input
+              id="signup-website"
+              type="text"
+              tabindex="-1"
+              formControlName="website"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="form__field form__field--consent">
+            <label class="form__checkbox">
+              <input type="checkbox" formControlName="consent" />
+              <span>
+                J'accepte que ces informations soient utilisées pour organiser le webinaire,
+                conformément aux
+                <a routerLink="/mentions-legales" fragment="donnees">
+                  informations sur les données personnelles</a
+                >.
+                <span aria-hidden="true">*</span>
+              </span>
+            </label>
+            @if (invalid(form.controls.consent)) {
+              <p class="form__error">
+                Cet accord est nécessaire pour enregistrer votre inscription.
+              </p>
+            }
+          </div>
+
+          @if (errorMessage()) {
+            <p class="form__alert" role="alert">
+              <i class="fi fi-rr-exclamation" aria-hidden="true"></i>
+              {{ errorMessage() }}
+            </p>
+          }
+
+          <div class="form__actions">
+            <button
+              type="submit"
+              class="btn btn--primary btn--block"
+              [disabled]="status() === 'sending'"
+            >
+              @if (status() === 'sending') {
+                <i class="fi fi-rr-spinner" aria-hidden="true"></i>
+                Inscription en cours…
+              } @else {
+                <i class="fi fi-rr-user-add" aria-hidden="true"></i>
+                S'inscrire au webinaire
+              }
+            </button>
+            <p class="form__legal">
+              Les champs marqués d'un astérisque sont obligatoires.
+              @if (formUrl) {
+                En cas de difficulté,
+                <a [href]="formUrl" target="_blank" rel="noopener">utilisez le formulaire Grist</a>.
+              }
+            </p>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</dialog>

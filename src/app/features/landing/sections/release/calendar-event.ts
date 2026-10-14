@@ -13,7 +13,10 @@ export interface CalendarEvent {
   readonly end: Date;
   readonly title: string;
   readonly description: string;
-  readonly url: string;
+  /** Lieu en clair : pour un webinaire, une simple mention « en ligne ». */
+  readonly location: string;
+  /** Page de référence de l'événement, s'il y en a une. */
+  readonly url?: string;
 }
 
 /** `20261207T130000Z` : date UTC sans séparateurs, comme l'exige le format. */
@@ -68,8 +71,8 @@ export function buildIcs(event: CalendarEvent): string {
     `DTEND:${formatUtc(event.end)}`,
     `SUMMARY:${escapeText(event.title)}`,
     `DESCRIPTION:${escapeText(event.description)}`,
-    `LOCATION:${escapeText(event.url)}`,
-    `URL:${event.url}`,
+    `LOCATION:${escapeText(event.location)}`,
+    ...(event.url ? [`URL:${event.url}`] : []),
     'END:VEVENT',
     'END:VCALENDAR',
   ];
@@ -88,7 +91,7 @@ export function googleCalendarUrl(event: CalendarEvent): string {
     text: event.title,
     dates: `${formatUtc(event.start)}/${formatUtc(event.end)}`,
     details: event.description,
-    location: event.url,
+    location: event.location,
   });
   return `https://calendar.google.com/calendar/render?${params}`;
 }
@@ -106,7 +109,7 @@ export function outlookCalendarUrl(event: CalendarEvent, account: 'office' | 'li
     startdt: event.start.toISOString(),
     enddt: event.end.toISOString(),
     body: event.description,
-    location: event.url,
+    location: event.location,
   });
   return `https://outlook.${account}.com/calendar/0/deeplink/compose?${params}`;
 }
