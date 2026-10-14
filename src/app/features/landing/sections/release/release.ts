@@ -8,10 +8,19 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 import { RELEASE_EVENT } from '../../landing-content';
 import { CalendarMenu } from './calendar-menu/calendar-menu';
 import { WebinarSignup } from './webinar-signup/webinar-signup';
+
+/**
+ * Ancre qui ouvre directement la modale d'inscription : `/#inscription-webinaire`,
+ * à diffuser dans les courriels et sur les réseaux. Elle est posée sur le
+ * bouton d'inscription, vers lequel la page défile d'abord.
+ */
+export const SIGNUP_FRAGMENT = 'inscription-webinaire';
 
 /** Temps restant avant l'échéance, déjà découpé pour l'affichage. */
 interface Remaining {
@@ -54,7 +63,8 @@ export class Release {
   protected readonly event = RELEASE_EVENT;
 
   /** Modale d'inscription, absente quand les inscriptions sont closes. */
-  protected readonly signup = viewChild.required(WebinarSignup);
+  protected readonly signup = viewChild(WebinarSignup);
+  protected readonly signupFragment = SIGNUP_FRAGMENT;
 
   private readonly phase = signal<Phase>(this.computePhase());
   protected readonly isLive = computed(() => this.phase() === 'live');
@@ -78,8 +88,24 @@ export class Release {
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+    const router = inject(Router);
 
     afterNextRender(() => {
+      // Lien direct vers l'inscription : à l'arrivée sur la page (le fragment
+      // est déjà dans l'adresse) comme lors d'une navigation interne vers
+      // l'ancre (le routeur l'annonce). Le défilement vers le bouton, lui,
+      // est déjà pris en charge par `Landing` et `App`.
+      const openIfRequested = () => {
+        if (router.parseUrl(router.url).fragment === SIGNUP_FRAGMENT) {
+          this.signup()?.open();
+        }
+      };
+      openIfRequested();
+      const subscription = router.events
+        .pipe(filter((event) => event instanceof NavigationEnd))
+        .subscribe(openIfRequested);
+      destroyRef.onDestroy(() => subscription.unsubscribe());
+
       const tick = () => {
         this.remaining.set(this.computeRemaining());
         this.phase.set(this.computePhase());

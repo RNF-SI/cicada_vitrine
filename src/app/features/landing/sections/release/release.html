@@ -14,7 +14,12 @@
 
       <div class="release__actions">
         @if (event.registration) {
-          <button type="button" class="btn btn--on-dark" (click)="signup().open()">
+          <button
+            type="button"
+            class="btn btn--on-dark"
+            [id]="signupFragment"
+            (click)="signup()?.open()"
+          >
             <i class="fi fi-rr-user-add" aria-hidden="true"></i>
             S'inscrire au webinaire
           </button>
